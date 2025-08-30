@@ -98,8 +98,8 @@ const Index = () => {
                     
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                       <div className="text-center space-y-2">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent/20 rounded-lg flex items-center justify-center mx-auto">
-                          <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-accent" />
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto">
+                          <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                         </div>
                         <div>
                           <h4 className="text-sm sm:text-base font-medium">Fast</h4>
@@ -108,8 +108,8 @@ const Index = () => {
                       </div>
                       
                       <div className="text-center space-y-2">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent/20 rounded-lg flex items-center justify-center mx-auto">
-                          <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-accent" />
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-red-50 rounded-lg flex items-center justify-center mx-auto">
+                          <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-red-500" />
                         </div>
                         <div>
                           <h4 className="text-sm sm:text-base font-medium">Beautiful</h4>
