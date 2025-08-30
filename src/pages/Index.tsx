@@ -170,7 +170,7 @@ const Index = () => {
         {/* Footer */}
         <footer className="text-center mt-16 pt-8 border-t border-border/50">
           <p className="text-sm text-muted-foreground">
-            Made with <Heart className="w-4 h-4 inline text-accent" /> to preserve and revive your precious memories
+            Made with <Heart className="w-4 h-4 inline text-red-500" /> to preserve and revive your precious memories
           </p>
         </footer>
       </div>

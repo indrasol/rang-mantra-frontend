@@ -111,7 +111,7 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
       <Card className="p-6">
         <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
           <div className="text-center sm:text-left">
-            <h3 className="text-lg font-semibold bg-gradient-warm bg-clip-text text-transparent">
+            <h3 className="text-lg font-semibold text-gray-800">
               Memory Successfully Revived!
             </h3>
             <p className="text-muted-foreground text-sm">
