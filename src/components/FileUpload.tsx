@@ -65,7 +65,7 @@ export const FileUpload = ({ onFileSelect, isProcessing }: FileUploadProps) => {
           </h3>
           <p className="text-sm sm:text-base text-muted-foreground max-w-md mx-auto px-4">
             Drag and drop your black & white photo here, or tap to browse. 
-            We'll bring it back to life with vibrant colors.
+            Perfect for wedding photos and family memories.
           </p>
         </div>
 

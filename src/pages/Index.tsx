@@ -69,11 +69,11 @@ const Index = () => {
               <Palette className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800">
-              ChromaRevive
+              RangMantra
             </h1>
           </div>
           <p className="text-base sm:text-xl text-foreground/80 max-w-2xl mx-auto leading-relaxed px-4">
-            Bring your cherished black & white memories back to life with AI-powered colorization
+            Transform your cherished black & white memories into vibrant colored moments
           </p>
         </header>
 
@@ -91,9 +91,9 @@ const Index = () => {
                       Transform Your Memories
                     </h2>
                     <p className="text-sm sm:text-base text-foreground/70 leading-relaxed">
-                      Our advanced AI technology analyzes your black & white photos and intelligently 
-                      adds realistic colors, bringing decades-old memories into the modern world with 
-                      stunning vibrancy.
+                      Transform your precious black & white wedding photos and family memories 
+                      into beautiful colored moments. Perfect for bringing decades-old marriage 
+                      photos back to life with stunning vibrancy.
                     </p>
                     
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
@@ -109,21 +109,11 @@ const Index = () => {
                       
                       <div className="text-center space-y-2">
                         <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent/20 rounded-lg flex items-center justify-center mx-auto">
-                          <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-accent" />
-                        </div>
-                        <div>
-                          <h4 className="text-sm sm:text-base font-medium">Smart</h4>
-                          <p className="text-xs sm:text-sm text-muted-foreground">AI-powered precision</p>
-                        </div>
-                      </div>
-                      
-                      <div className="text-center space-y-2">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent/20 rounded-lg flex items-center justify-center mx-auto">
                           <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-accent" />
                         </div>
                         <div>
-                          <h4 className="text-sm sm:text-base font-medium">Magical</h4>
-                          <p className="text-xs sm:text-sm text-muted-foreground">Breathe life into photos</p>
+                          <h4 className="text-sm sm:text-base font-medium">Beautiful</h4>
+                          <p className="text-xs sm:text-sm text-muted-foreground">Stunning results</p>
                         </div>
                       </div>
                     </div>

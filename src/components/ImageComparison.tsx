@@ -24,7 +24,7 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
       
       const a = document.createElement('a');
       a.href = url;
-      a.download = `chromarevive-${Date.now()}.jpg`;
+      a.download = `rangmantra-${Date.now()}.jpg`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -41,11 +41,11 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
       try {
         const response = await fetch(colorizedImage);
         const blob = await response.blob();
-        const file = new File([blob], 'chromarevive-memory.jpg', { type: 'image/jpeg' });
+        const file = new File([blob], 'rangmantra-memory.jpg', { type: 'image/jpeg' });
         
         await navigator.share({
-          title: 'My Colorized Memory - ChromaRevive',
-          text: 'Check out how ChromaRevive brought my old photo back to life!',
+          title: 'My Colorized Memory - RangMantra',
+          text: 'Check out how RangMantra brought my old photo back to life!',
           files: [file]
         });
       } catch (error) {
