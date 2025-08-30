@@ -68,7 +68,7 @@ const Index = () => {
             <div className="w-12 h-12 bg-gradient-warm rounded-xl flex items-center justify-center shadow-glow">
               <Palette className="w-6 h-6 text-primary-foreground" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-warm bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl font-bold text-black">
               ChromaRevive
             </h1>
           </div>
@@ -87,7 +87,7 @@ const Index = () => {
               <Card className="overflow-hidden shadow-warm bg-gradient-nostalgic/10 border-primary/20">
                 <div className="grid md:grid-cols-2 gap-8 p-8">
                   <div className="space-y-6">
-                    <h2 className="text-3xl font-bold bg-gradient-warm bg-clip-text text-transparent">
+                    <h2 className="text-3xl font-bold text-black">
                       Transform Your Memories
                     </h2>
                     <p className="text-foreground/70 leading-relaxed">
