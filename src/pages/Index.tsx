@@ -68,7 +68,7 @@ const Index = () => {
             <div className="w-12 h-12 bg-gradient-warm rounded-xl flex items-center justify-center shadow-glow">
               <Palette className="w-6 h-6 text-primary-foreground" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-black">
+            <h1 className="text-4xl md:text-5xl font-bold text-orange-800">
               ChromaRevive
             </h1>
           </div>
