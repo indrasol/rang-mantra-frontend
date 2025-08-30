@@ -62,16 +62,16 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
       <Card className="overflow-hidden shadow-warm">
         <div className="relative">
           {showComparison ? (
-            <div className="grid md:grid-cols-2 gap-0">
+            <div className="flex flex-col sm:grid sm:grid-cols-2 gap-0">
               <div className="relative group">
                 <img 
                   src={originalImage} 
                   alt="Original black and white photo"
-                  className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-64 sm:h-auto object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                 <div className="absolute bottom-4 left-4">
-                  <span className="bg-black/80 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <span className="bg-black/80 text-white px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
                     Original
                   </span>
                 </div>
@@ -81,11 +81,11 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
                 <img 
                   src={colorizedImage} 
                   alt="Colorized photo"
-                  className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-64 sm:h-auto object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-warm/0 group-hover:bg-gradient-warm/10 transition-all duration-300" />
                 <div className="absolute bottom-4 right-4">
-                  <span className="bg-gradient-warm text-primary-foreground px-3 py-1 rounded-full text-sm font-medium shadow-glow">
+                  <span className="bg-gradient-warm text-primary-foreground px-3 py-1 rounded-full text-xs sm:text-sm font-medium shadow-glow">
                     Colorized
                   </span>
                 </div>
@@ -96,10 +96,10 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
               <img 
                 src={colorizedImage} 
                 alt="Colorized photo"
-                className="w-full h-auto object-cover"
+                className="w-full h-64 sm:h-auto object-cover"
               />
               <div className="absolute top-4 right-4">
-                <span className="bg-gradient-warm text-primary-foreground px-3 py-1 rounded-full text-sm font-medium shadow-glow">
+                <span className="bg-gradient-warm text-primary-foreground px-3 py-1 rounded-full text-xs sm:text-sm font-medium shadow-glow">
                   Your Revived Memory
                 </span>
               </div>
@@ -108,33 +108,35 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
         </div>
       </Card>
 
-      <Card className="p-6">
-        <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
-          <div className="text-center sm:text-left">
-            <h3 className="text-lg font-semibold text-gray-800">
+      <Card className="p-4 sm:p-6">
+        <div className="flex flex-col gap-4 items-center text-center sm:text-left sm:flex-row sm:justify-between">
+          <div>
+            <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-1">
               Memory Successfully Revived!
             </h3>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-xs sm:text-sm">
               Your black & white photo now bursts with life and color
             </p>
           </div>
           
-          <div className="flex flex-wrap gap-3 justify-center">
+          <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
             <Button
               variant="outline"
               size="sm"
               onClick={() => setShowComparison(!showComparison)}
-              className="transition-all duration-300 hover:shadow-warm/50"
+              className="transition-all duration-300 hover:shadow-warm/50 text-xs sm:text-sm"
             >
               {showComparison ? (
                 <>
-                  <EyeOff className="w-4 h-4 mr-2" />
-                  Hide Comparison
+                  <EyeOff className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">Hide Comparison</span>
+                  <span className="sm:hidden">Hide</span>
                 </>
               ) : (
                 <>
-                  <Eye className="w-4 h-4 mr-2" />
-                  Show Comparison
+                  <Eye className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">Show Comparison</span>
+                  <span className="sm:hidden">Show</span>
                 </>
               )}
             </Button>
@@ -143,9 +145,9 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
               variant="glow"
               size="sm"
               onClick={handleShare}
-              className="transition-all duration-300"
+              className="transition-all duration-300 text-xs sm:text-sm"
             >
-              <Share2 className="w-4 h-4 mr-2" />
+              <Share2 className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
               Share
             </Button>
             
@@ -154,16 +156,17 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
               size="sm"
               onClick={handleDownload}
               disabled={isDownloading}
-              className="transition-all duration-300"
+              className="transition-all duration-300 text-xs sm:text-sm"
             >
               {isDownloading ? (
                 <>
-                  <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
-                  Downloading...
+                  <RefreshCw className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 animate-spin" />
+                  <span className="hidden sm:inline">Downloading...</span>
+                  <span className="sm:hidden">...</span>
                 </>
               ) : (
                 <>
-                  <Download className="w-4 h-4 mr-2" />
+                  <Download className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                   Download
                 </>
               )}
@@ -177,7 +180,7 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
           <Button
             variant="outline"
             onClick={onNewPhoto}
-            className="transition-all duration-300 hover:shadow-warm/50"
+            className="transition-all duration-300 hover:shadow-warm/50 w-full sm:w-auto"
           >
             <RefreshCw className="w-4 h-4 mr-2" />
             Revive Another Memory

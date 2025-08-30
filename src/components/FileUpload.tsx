@@ -44,7 +44,7 @@ export const FileUpload = ({ onFileSelect, isProcessing }: FileUploadProps) => {
   return (
     <Card 
       className={cn(
-        "relative border-2 border-dashed transition-all duration-300 p-12",
+        "relative border-2 border-dashed transition-all duration-300 p-6 sm:p-12",
         isDragOver 
           ? "border-primary bg-gradient-nostalgic/10 shadow-warm scale-[1.02]" 
           : "border-border hover:border-primary/50 hover:shadow-warm/50",
@@ -54,26 +54,26 @@ export const FileUpload = ({ onFileSelect, isProcessing }: FileUploadProps) => {
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
-      <div className="text-center space-y-6">
-        <div className="mx-auto w-24 h-24 bg-gradient-warm rounded-full flex items-center justify-center shadow-glow">
-          <Upload className="w-12 h-12 text-primary-foreground" />
+      <div className="text-center space-y-4 sm:space-y-6">
+        <div className="mx-auto w-16 h-16 sm:w-24 sm:h-24 bg-gradient-warm rounded-full flex items-center justify-center shadow-glow">
+          <Upload className="w-8 h-8 sm:w-12 sm:h-12 text-primary-foreground" />
         </div>
         
-        <div className="space-y-3">
-          <h3 className="text-2xl font-semibold bg-gradient-warm bg-clip-text text-transparent">
+        <div className="space-y-2 sm:space-y-3">
+          <h3 className="text-xl sm:text-2xl font-semibold bg-gradient-warm bg-clip-text text-transparent">
             Upload Your Memory
           </h3>
-          <p className="text-muted-foreground max-w-md mx-auto">
-            Drag and drop your black & white photo here, or click to browse. 
+          <p className="text-sm sm:text-base text-muted-foreground max-w-md mx-auto px-4">
+            Drag and drop your black & white photo here, or tap to browse. 
             We'll bring it back to life with vibrant colors.
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className="flex flex-col gap-3 sm:gap-4 justify-center items-center">
           <Button 
             variant="hero" 
             size="lg"
-            className="relative overflow-hidden"
+            className="relative overflow-hidden w-full sm:w-auto min-h-[48px]"
             disabled={isProcessing}
           >
             <input
@@ -87,7 +87,7 @@ export const FileUpload = ({ onFileSelect, isProcessing }: FileUploadProps) => {
             Choose Photo
           </Button>
           
-          <div className="flex items-center text-sm text-muted-foreground">
+          <div className="flex items-center text-xs sm:text-sm text-muted-foreground">
             <ImageIcon className="w-4 h-4 mr-1" />
             JPG, PNG, or WEBP
           </div>

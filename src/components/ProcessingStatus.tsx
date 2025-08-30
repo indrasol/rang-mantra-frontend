@@ -35,27 +35,27 @@ export const ProcessingStatus = ({ stage, progress }: ProcessingStatusProps) => 
   const Icon = currentStage.icon;
   
   return (
-    <Card className="p-8 text-center space-y-6 bg-gradient-nostalgic/5 border-primary/20">
-      <div className="mx-auto w-20 h-20 bg-gradient-warm rounded-full flex items-center justify-center shadow-glow animate-pulse">
+    <Card className="p-6 sm:p-8 text-center space-y-4 sm:space-y-6 bg-gradient-nostalgic/5 border-primary/20">
+      <div className="mx-auto w-16 h-16 sm:w-20 sm:h-20 bg-gradient-warm rounded-full flex items-center justify-center shadow-glow animate-pulse">
         {stage === 'complete' ? (
-          <Icon className="w-10 h-10 text-primary-foreground" />
+          <Icon className="w-8 h-8 sm:w-10 sm:h-10 text-primary-foreground" />
         ) : (
-          <Loader2 className="w-10 h-10 text-primary-foreground animate-spin" />
+          <Loader2 className="w-8 h-8 sm:w-10 sm:h-10 text-primary-foreground animate-spin" />
         )}
       </div>
       
-      <div className="space-y-3">
-        <h3 className="text-xl font-semibold bg-gradient-warm bg-clip-text text-transparent">
+      <div className="space-y-2 sm:space-y-3">
+        <h3 className="text-lg sm:text-xl font-semibold bg-gradient-warm bg-clip-text text-transparent">
           {currentStage.title}
         </h3>
-        <p className="text-muted-foreground">
+        <p className="text-sm sm:text-base text-muted-foreground px-4">
           {currentStage.description}
         </p>
       </div>
       
       <div className="space-y-2">
         <Progress value={progress} className="h-2" />
-        <p className="text-sm text-muted-foreground">{progress}% complete</p>
+        <p className="text-xs sm:text-sm text-muted-foreground">{progress}% complete</p>
       </div>
     </Card>
   );

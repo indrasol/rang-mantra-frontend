@@ -61,18 +61,18 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-sunset">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6 sm:py-8">
         {/* Header */}
-        <header className="text-center mb-12">
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-gradient-warm rounded-xl flex items-center justify-center shadow-glow">
-              <Palette className="w-6 h-6 text-primary-foreground" />
+        <header className="text-center mb-8 sm:mb-12">
+          <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-warm rounded-xl flex items-center justify-center shadow-glow">
+              <Palette className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-800">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800">
               ChromaRevive
             </h1>
           </div>
-          <p className="text-xl text-foreground/80 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-xl text-foreground/80 max-w-2xl mx-auto leading-relaxed px-4">
             Bring your cherished black & white memories back to life with AI-powered colorization
           </p>
         </header>
@@ -80,60 +80,60 @@ const Index = () => {
         {/* Main Content */}
         <main className="max-w-4xl mx-auto">
           {appState === 'upload' && (
-            <div className="space-y-12">
+            <div className="space-y-8 sm:space-y-12">
               <FileUpload onFileSelect={handleFileSelect} />
               
               {/* Hero Section */}
               <Card className="overflow-hidden shadow-warm bg-gradient-nostalgic/10 border-primary/20">
-                <div className="grid md:grid-cols-2 gap-8 p-8">
-                  <div className="space-y-6">
-                    <h2 className="text-3xl font-bold text-black">
+                <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 p-6 sm:p-8">
+                  <div className="space-y-4 sm:space-y-6 order-2 lg:order-1">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-black">
                       Transform Your Memories
                     </h2>
-                    <p className="text-foreground/70 leading-relaxed">
+                    <p className="text-sm sm:text-base text-foreground/70 leading-relaxed">
                       Our advanced AI technology analyzes your black & white photos and intelligently 
                       adds realistic colors, bringing decades-old memories into the modern world with 
                       stunning vibrancy.
                     </p>
                     
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                       <div className="text-center space-y-2">
-                        <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mx-auto">
-                          <Clock className="w-6 h-6 text-accent" />
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent/20 rounded-lg flex items-center justify-center mx-auto">
+                          <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-accent" />
                         </div>
                         <div>
-                          <h4 className="font-medium">Fast</h4>
-                          <p className="text-sm text-muted-foreground">Results in seconds</p>
+                          <h4 className="text-sm sm:text-base font-medium">Fast</h4>
+                          <p className="text-xs sm:text-sm text-muted-foreground">Results in seconds</p>
                         </div>
                       </div>
                       
                       <div className="text-center space-y-2">
-                        <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mx-auto">
-                          <Sparkles className="w-6 h-6 text-accent" />
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent/20 rounded-lg flex items-center justify-center mx-auto">
+                          <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-accent" />
                         </div>
                         <div>
-                          <h4 className="font-medium">Smart</h4>
-                          <p className="text-sm text-muted-foreground">AI-powered precision</p>
+                          <h4 className="text-sm sm:text-base font-medium">Smart</h4>
+                          <p className="text-xs sm:text-sm text-muted-foreground">AI-powered precision</p>
                         </div>
                       </div>
                       
                       <div className="text-center space-y-2">
-                        <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mx-auto">
-                          <Heart className="w-6 h-6 text-accent" />
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent/20 rounded-lg flex items-center justify-center mx-auto">
+                          <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-accent" />
                         </div>
                         <div>
-                          <h4 className="font-medium">Magical</h4>
-                          <p className="text-sm text-muted-foreground">Breathe life into photos</p>
+                          <h4 className="text-sm sm:text-base font-medium">Magical</h4>
+                          <p className="text-xs sm:text-sm text-muted-foreground">Breathe life into photos</p>
                         </div>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="relative">
+                  <div className="relative order-1 lg:order-2">
                     <img 
                       src={heroImage} 
                       alt="Before and after colorization example"
-                      className="rounded-lg shadow-warm w-full h-auto object-cover"
+                      className="rounded-lg shadow-warm w-full h-48 sm:h-auto object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-warm/10 rounded-lg"></div>
                   </div>
@@ -143,7 +143,7 @@ const Index = () => {
           )}
 
           {appState === 'processing' && (
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               <ProcessingStatus stage={processingStage} progress={progress} />
               
               {originalImage && (
@@ -151,7 +151,7 @@ const Index = () => {
                   <img 
                     src={originalImage} 
                     alt="Your uploaded photo"
-                    className="w-full h-auto object-cover max-h-96"
+                    className="w-full h-64 sm:h-auto object-cover sm:max-h-96"
                   />
                 </Card>
               )}
@@ -168,8 +168,8 @@ const Index = () => {
         </main>
 
         {/* Footer */}
-        <footer className="text-center mt-16 pt-8 border-t border-border/50">
-          <p className="text-sm text-muted-foreground">
+        <footer className="text-center mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-border/50">
+          <p className="text-xs sm:text-sm text-muted-foreground px-4">
             Made with <Heart className="w-4 h-4 inline text-red-500" /> to preserve and revive your precious memories
           </p>
         </footer>
