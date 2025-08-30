@@ -1,11 +1,178 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { Sparkles, Heart, Clock, Palette } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { FileUpload } from "@/components/FileUpload";
+import { ProcessingStatus } from "@/components/ProcessingStatus";
+import { ImageComparison } from "@/components/ImageComparison";
+import heroImage from "@/assets/hero-transformation.jpg";
+
+type AppState = 'upload' | 'processing' | 'complete';
+type ProcessingStage = 'analyzing' | 'colorizing' | 'enhancing' | 'complete';
 
 const Index = () => {
+  const [appState, setAppState] = useState<AppState>('upload');
+  const [processingStage, setProcessingStage] = useState<ProcessingStage>('analyzing');
+  const [progress, setProgress] = useState(0);
+  const [originalImage, setOriginalImage] = useState<string>('');
+  const [colorizedImage, setColorizedImage] = useState<string>('');
+
+  const handleFileSelect = (file: File) => {
+    const imageUrl = URL.createObjectURL(file);
+    setOriginalImage(imageUrl);
+    setAppState('processing');
+    simulateProcessing();
+  };
+
+  const simulateProcessing = () => {
+    // Simulate processing stages
+    const stages: ProcessingStage[] = ['analyzing', 'colorizing', 'enhancing', 'complete'];
+    let currentStageIndex = 0;
+    let currentProgress = 0;
+
+    const interval = setInterval(() => {
+      currentProgress += Math.random() * 15 + 5;
+      
+      if (currentProgress >= 100) {
+        currentStageIndex++;
+        if (currentStageIndex < stages.length) {
+          setProcessingStage(stages[currentStageIndex]);
+          currentProgress = 0;
+        } else {
+          clearInterval(interval);
+          // For demo, use the hero image as colorized result
+          setColorizedImage(heroImage);
+          setAppState('complete');
+          return;
+        }
+      }
+      
+      setProgress(Math.min(currentProgress, 100));
+    }, 500);
+  };
+
+  const handleNewPhoto = () => {
+    setAppState('upload');
+    setProcessingStage('analyzing');
+    setProgress(0);
+    setOriginalImage('');
+    setColorizedImage('');
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-gradient-sunset">
+      <div className="container mx-auto px-4 py-8">
+        {/* Header */}
+        <header className="text-center mb-12">
+          <div className="inline-flex items-center gap-3 mb-6">
+            <div className="w-12 h-12 bg-gradient-warm rounded-xl flex items-center justify-center shadow-glow">
+              <Palette className="w-6 h-6 text-primary-foreground" />
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-warm bg-clip-text text-transparent">
+              ChromaRevive
+            </h1>
+          </div>
+          <p className="text-xl text-foreground/80 max-w-2xl mx-auto leading-relaxed">
+            Bring your cherished black & white memories back to life with AI-powered colorization
+          </p>
+        </header>
+
+        {/* Main Content */}
+        <main className="max-w-4xl mx-auto">
+          {appState === 'upload' && (
+            <div className="space-y-12">
+              <FileUpload onFileSelect={handleFileSelect} />
+              
+              {/* Hero Section */}
+              <Card className="overflow-hidden shadow-warm bg-gradient-nostalgic/10 border-primary/20">
+                <div className="grid md:grid-cols-2 gap-8 p-8">
+                  <div className="space-y-6">
+                    <h2 className="text-3xl font-bold bg-gradient-warm bg-clip-text text-transparent">
+                      Transform Your Memories
+                    </h2>
+                    <p className="text-foreground/70 leading-relaxed">
+                      Our advanced AI technology analyzes your black & white photos and intelligently 
+                      adds realistic colors, bringing decades-old memories into the modern world with 
+                      stunning vibrancy.
+                    </p>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div className="text-center space-y-2">
+                        <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mx-auto">
+                          <Clock className="w-6 h-6 text-accent" />
+                        </div>
+                        <div>
+                          <h4 className="font-medium">Fast</h4>
+                          <p className="text-sm text-muted-foreground">Results in seconds</p>
+                        </div>
+                      </div>
+                      
+                      <div className="text-center space-y-2">
+                        <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mx-auto">
+                          <Sparkles className="w-6 h-6 text-accent" />
+                        </div>
+                        <div>
+                          <h4 className="font-medium">Smart</h4>
+                          <p className="text-sm text-muted-foreground">AI-powered precision</p>
+                        </div>
+                      </div>
+                      
+                      <div className="text-center space-y-2">
+                        <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mx-auto">
+                          <Heart className="w-6 h-6 text-accent" />
+                        </div>
+                        <div>
+                          <h4 className="font-medium">Magical</h4>
+                          <p className="text-sm text-muted-foreground">Breathe life into photos</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="relative">
+                    <img 
+                      src={heroImage} 
+                      alt="Before and after colorization example"
+                      className="rounded-lg shadow-warm w-full h-auto object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-warm/10 rounded-lg"></div>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          )}
+
+          {appState === 'processing' && (
+            <div className="space-y-8">
+              <ProcessingStatus stage={processingStage} progress={progress} />
+              
+              {originalImage && (
+                <Card className="overflow-hidden shadow-warm">
+                  <img 
+                    src={originalImage} 
+                    alt="Your uploaded photo"
+                    className="w-full h-auto object-cover max-h-96"
+                  />
+                </Card>
+              )}
+            </div>
+          )}
+
+          {appState === 'complete' && originalImage && colorizedImage && (
+            <ImageComparison
+              originalImage={originalImage}
+              colorizedImage={colorizedImage}
+              onNewPhoto={handleNewPhoto}
+            />
+          )}
+        </main>
+
+        {/* Footer */}
+        <footer className="text-center mt-16 pt-8 border-t border-border/50">
+          <p className="text-sm text-muted-foreground">
+            Made with <Heart className="w-4 h-4 inline text-accent" /> to preserve and revive your precious memories
+          </p>
+        </footer>
       </div>
     </div>
   );
