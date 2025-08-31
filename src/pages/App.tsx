@@ -113,8 +113,8 @@ const App = () => {
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-warm rounded-xl flex items-center justify-center shadow-glow">
                 <Palette className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800">
-                RangMantra
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+                <span className="text-orange-600">Ran</span><span className="text-orange-600">g</span>Mantra
               </h1>
             </div>
             <div className="flex-1 flex justify-end gap-2">
