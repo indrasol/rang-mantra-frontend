@@ -165,7 +165,7 @@ const Landing = () => {
             onClick={() => navigate('/login')}
             className="gap-3 text-lg px-8 py-4 h-14 font-semibold transition-all duration-300 hover:scale-105 hover:shadow-glow"
           >
-            Add Color
+            Add Color to your Memory
             <ArrowRight className="w-5 h-5" />
           </Button>
           <p className="text-sm text-foreground/60">
