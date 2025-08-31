@@ -119,14 +119,6 @@ const App = () => {
             </div>
             <div className="flex-1 flex justify-end gap-2">
               <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => navigate('/')}
-                className="text-sm"
-              >
-                Home
-              </Button>
-              <Button
                 variant="outline"
                 size="sm"
                 onClick={handleLogout}
@@ -147,65 +139,6 @@ const App = () => {
           {appState === 'upload' && (
             <div className="space-y-8 sm:space-y-12">
               <FileUpload onFileSelect={handleFileSelect} />
-              
-              {/* Hero Section */}
-              <Card className="overflow-hidden shadow-warm bg-gradient-nostalgic/10 border-primary/20">
-                <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 p-6 sm:p-8">
-                  <div className="space-y-4 sm:space-y-6 order-2 lg:order-1">
-                    <h2 className="text-2xl sm:text-3xl font-bold text-black">
-                      Transform Your Memories
-                    </h2>
-                    <p className="text-sm sm:text-base text-foreground/70 leading-relaxed">
-                      Transform your precious black & white wedding photos and family memories 
-                      into beautiful colored moments. Perfect for bringing decades-old marriage 
-                      photos back to life with stunning vibrancy.
-                    </p>
-                    
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                      <div className="text-center space-y-2">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-50 rounded-lg flex items-center justify-center mx-auto">
-                          <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" />
-                        </div>
-                        <div>
-                          <h4 className="text-sm sm:text-base font-medium">Fast</h4>
-                          <p className="text-xs sm:text-sm text-muted-foreground">Results in seconds</p>
-                        </div>
-                      </div>
-                      
-                      <div className="text-center space-y-2">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-red-50 rounded-lg flex items-center justify-center mx-auto">
-                          <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-red-500" />
-                        </div>
-                        <div>
-                          <h4 className="text-sm sm:text-base font-medium">Beautiful</h4>
-                          <p className="text-xs sm:text-sm text-muted-foreground">Stunning results</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="relative order-1 lg:order-2">
-                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                      <div className="text-center">
-                        <img 
-                          src={beforeImage} 
-                          alt="Black and white wedding photo"
-                          className="rounded-lg shadow-warm w-full h-32 sm:h-48 object-cover"
-                        />
-                        <p className="text-xs sm:text-sm text-muted-foreground mt-2">Before</p>
-                      </div>
-                      <div className="text-center">
-                        <img 
-                          src={afterImage} 
-                          alt="Colorized wedding photo"
-                          className="rounded-lg shadow-warm w-full h-32 sm:h-48 object-cover"
-                        />
-                        <p className="text-xs sm:text-sm text-muted-foreground mt-2">After</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Card>
             </div>
           )}
 
