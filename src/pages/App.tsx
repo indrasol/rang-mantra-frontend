@@ -106,7 +106,7 @@ const App = () => {
     <div className="min-h-screen bg-gradient-sunset">
       <div className="container mx-auto px-4 py-6 sm:py-8">
         {/* Header */}
-        <header className="text-center mb-8 sm:mb-12">
+        <header className="text-center mb-16 sm:mb-20">
           <div className="flex justify-between items-start mb-4 sm:mb-6">
             <div className="flex-1"></div>
             <div className="inline-flex items-center gap-2 sm:gap-3">
@@ -168,7 +168,7 @@ const App = () => {
         </main>
 
         {/* Footer */}
-        <footer className="text-center mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-border/50">
+        <footer className="text-center mt-20 sm:mt-24 pt-6 sm:pt-8 border-t border-border/50">
           <p className="text-xs sm:text-sm text-muted-foreground px-4">
             Made with <Heart className="w-4 h-4 inline text-red-500" /> to preserve and revive your precious memories
           </p>
