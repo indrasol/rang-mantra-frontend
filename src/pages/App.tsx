@@ -1,8 +1,11 @@
-import { useState } from "react";
-import { Sparkles, Heart, Clock, Palette, LogIn } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Sparkles, Heart, Clock, Palette, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { User } from "@supabase/supabase-js";
+import { useToast } from "@/hooks/use-toast";
 import { FileUpload } from "@/components/FileUpload";
 import { ProcessingStatus } from "@/components/ProcessingStatus";
 import { ImageComparison } from "@/components/ImageComparison";
@@ -13,13 +16,37 @@ import afterImage from "@/assets/after-color.jpg";
 type AppState = 'upload' | 'processing' | 'complete';
 type ProcessingStage = 'analyzing' | 'colorizing' | 'enhancing' | 'complete';
 
-const Index = () => {
+const App = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const [user, setUser] = useState<User | null>(null);
   const [appState, setAppState] = useState<AppState>('upload');
   const [processingStage, setProcessingStage] = useState<ProcessingStage>('analyzing');
   const [progress, setProgress] = useState(0);
   const [originalImage, setOriginalImage] = useState<string>('');
   const [colorizedImage, setColorizedImage] = useState<string>('');
+
+  // Auth protection
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        setUser(session.user);
+      } else {
+        navigate('/login');
+      }
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session?.user) {
+        setUser(session.user);
+      } else {
+        setUser(null);
+        navigate('/login');
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [navigate]);
 
   const handleFileSelect = (file: File) => {
     const imageUrl = URL.createObjectURL(file);
@@ -63,6 +90,18 @@ const Index = () => {
     setColorizedImage('');
   };
 
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    toast({
+      title: "Logged out",
+      description: "You've been logged out successfully",
+    });
+  };
+
+  if (!user) {
+    return null; // Will redirect to login
+  }
+
   return (
     <div className="min-h-screen bg-gradient-sunset">
       <div className="container mx-auto px-4 py-6 sm:py-8">
@@ -78,15 +117,23 @@ const Index = () => {
                 RangMantra
               </h1>
             </div>
-            <div className="flex-1 flex justify-end">
+            <div className="flex-1 flex justify-end gap-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate('/')}
+                className="text-sm"
+              >
+                Home
+              </Button>
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => navigate('/login')}
+                onClick={handleLogout}
                 className="gap-2 transition-all duration-300 hover:scale-105"
               >
-                <LogIn className="w-4 h-4" />
-                Login
+                <LogOut className="w-4 h-4" />
+                Logout
               </Button>
             </div>
           </div>
@@ -198,4 +245,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default App;

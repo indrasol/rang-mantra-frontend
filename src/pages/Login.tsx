@@ -103,7 +103,7 @@ const Login = () => {
           title: "Success!",
           description: "You've been logged in successfully",
         });
-        navigate('/');
+        navigate('/app');
       }
     } catch (error) {
       toast({
