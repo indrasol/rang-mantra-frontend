@@ -6,6 +6,8 @@ import { FileUpload } from "@/components/FileUpload";
 import { ProcessingStatus } from "@/components/ProcessingStatus";
 import { ImageComparison } from "@/components/ImageComparison";
 import heroImage from "@/assets/hero-transformation.jpg";
+import beforeImage from "@/assets/before-bw.jpg";
+import afterImage from "@/assets/after-color.jpg";
 
 type AppState = 'upload' | 'processing' | 'complete';
 type ProcessingStage = 'analyzing' | 'colorizing' | 'enhancing' | 'complete';
@@ -120,12 +122,24 @@ const Index = () => {
                   </div>
                   
                   <div className="relative order-1 lg:order-2">
-                    <img 
-                      src={heroImage} 
-                      alt="Before and after colorization example"
-                      className="rounded-lg shadow-warm w-full h-48 sm:h-auto object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-warm/10 rounded-lg"></div>
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                      <div className="text-center">
+                        <img 
+                          src={beforeImage} 
+                          alt="Black and white wedding photo"
+                          className="rounded-lg shadow-warm w-full h-32 sm:h-48 object-cover"
+                        />
+                        <p className="text-xs sm:text-sm text-muted-foreground mt-2">Before</p>
+                      </div>
+                      <div className="text-center">
+                        <img 
+                          src={afterImage} 
+                          alt="Colorized wedding photo"
+                          className="rounded-lg shadow-warm w-full h-32 sm:h-48 object-cover"
+                        />
+                        <p className="text-xs sm:text-sm text-muted-foreground mt-2">After</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </Card>
