@@ -91,22 +91,28 @@ const Landing = () => {
         </div>
 
         {/* Hero Image */}
-        <div className="relative max-w-4xl mx-auto animate-fade-in">
+        <div className="relative max-w-6xl mx-auto animate-fade-in">
           <div className="grid grid-cols-2 gap-0">
             <div className="text-center">
-              <img 
-                src={beforeImage} 
-                alt="Original black and white wedding photo"
-                className="w-full h-auto object-contain"
-              />
+              <div className="w-full">
+                <img 
+                  src={beforeImage} 
+                  alt="Original black and white wedding photo"
+                  className="w-full max-w-full h-auto object-contain"
+                  style={{ maxHeight: 'none' }}
+                />
+              </div>
               <p className="text-xs sm:text-sm text-muted-foreground mt-2">Before</p>
             </div>
             <div className="text-center">
-              <img 
-                src={afterImage} 
-                alt="AI colorized wedding photo"
-                className="w-full h-auto object-contain"
-              />
+              <div className="w-full">
+                <img 
+                  src={afterImage} 
+                  alt="AI colorized wedding photo"
+                  className="w-full max-w-full h-auto object-contain"
+                  style={{ maxHeight: 'none' }}
+                />
+              </div>
               <p className="text-xs sm:text-sm text-muted-foreground mt-2">After</p>
             </div>
           </div>
