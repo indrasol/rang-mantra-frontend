@@ -103,8 +103,8 @@ const App = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-sunset">
-      <div className="container mx-auto px-4 py-6 sm:py-8">
+    <div className="min-h-screen bg-gradient-sunset flex flex-col">
+      <div className="container mx-auto px-4 py-6 sm:py-8 flex-1 flex flex-col">
         {/* Header */}
         <header className="text-center mb-16 sm:mb-20">
           <div className="flex justify-between items-start mb-4 sm:mb-6">
@@ -135,7 +135,7 @@ const App = () => {
         </header>
 
         {/* Main Content */}
-        <main className="max-w-4xl mx-auto">
+        <main className="max-w-4xl mx-auto flex-1">
           {appState === 'upload' && (
             <div className="space-y-8 sm:space-y-12">
               <FileUpload onFileSelect={handleFileSelect} />
@@ -168,7 +168,7 @@ const App = () => {
         </main>
 
         {/* Footer */}
-        <footer className="text-center mt-20 sm:mt-24 pt-6 sm:pt-8 border-t border-border/50">
+        <footer className="text-center pt-6 sm:pt-8 border-t border-border/50 mt-auto">
           <p className="text-xs sm:text-sm text-muted-foreground px-4">
             Made with <Heart className="w-4 h-4 inline text-red-500" /> to preserve and revive your precious memories
           </p>
