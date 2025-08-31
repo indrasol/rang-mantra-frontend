@@ -92,26 +92,24 @@ const Landing = () => {
 
         {/* Hero Image */}
         <div className="relative max-w-4xl mx-auto animate-fade-in">
-          <Card className="overflow-hidden shadow-warm bg-card/95 backdrop-blur-sm border-primary/20 p-6">
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              <div className="text-center">
-                <img 
-                  src={beforeImage} 
-                  alt="Original black and white wedding photo"
-                  className="rounded-lg shadow-warm w-full h-32 sm:h-48 object-cover"
-                />
-                <p className="text-xs sm:text-sm text-muted-foreground mt-2">Before</p>
-              </div>
-              <div className="text-center">
-                <img 
-                  src={afterImage} 
-                  alt="AI colorized wedding photo"
-                  className="rounded-lg shadow-warm w-full h-32 sm:h-48 object-cover"
-                />
-                <p className="text-xs sm:text-sm text-muted-foreground mt-2">After</p>
-              </div>
+          <div className="grid grid-cols-2 gap-0">
+            <div className="text-center">
+              <img 
+                src={beforeImage} 
+                alt="Original black and white wedding photo"
+                className="w-full h-48 sm:h-64 object-cover"
+              />
+              <p className="text-xs sm:text-sm text-muted-foreground mt-2">Before</p>
             </div>
-          </Card>
+            <div className="text-center">
+              <img 
+                src={afterImage} 
+                alt="AI colorized wedding photo"
+                className="w-full h-48 sm:h-64 object-cover"
+              />
+              <p className="text-xs sm:text-sm text-muted-foreground mt-2">After</p>
+            </div>
+          </div>
         </div>
       </section>
 
