@@ -2,8 +2,16 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-const SUPABASE_URL = "https://mfjxcvpvdmlunitptxnj.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1manhjdnB2ZG1sdW5pdHB0eG5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY2MDExMzIsImV4cCI6MjA3MjE3NzEzMn0.iCEVjwIgdppaZHSkuoJaJcKyBhBlfh8phDRgNmVvD6U";
+// Read Supabase credentials from environment variables.
+// When using Vite you must prefix client-side env variables with `VITE_`.
+// Be sure to create a `.env` (or `.env.development` / `.env.production`) file at the project root
+// and define:
+//   VITE_SUPABASE_URL=<YOUR_SUPABASE_URL>
+//   VITE_SUPABASE_ANON_KEY=<YOUR_SUPABASE_ANON_KEY>
+// For repository sharing, commit a `.env.example` instead that contains placeholder values.
+
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
+const SUPABASE_PUBLISHABLE_KEY = import.meta.env.SUPABASE_PUBLISHABLE_KEY as string;
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
