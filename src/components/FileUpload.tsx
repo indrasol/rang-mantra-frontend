@@ -64,8 +64,7 @@ export const FileUpload = ({ onFileSelect, isProcessing }: FileUploadProps) => {
             Upload Your Memory
           </h3>
           <p className="text-sm sm:text-base text-muted-foreground max-w-md mx-auto px-4">
-            Drag and drop your black & white photo here, or tap to browse. 
-            Perfect for wedding photos and family memories.
+            Drag and drop your black & white photo here, or tap to browse.
           </p>
         </div>
 
@@ -86,11 +85,6 @@ export const FileUpload = ({ onFileSelect, isProcessing }: FileUploadProps) => {
             <FileImage className="w-5 h-5 mr-2" />
             Choose Photo
           </Button>
-          
-          <div className="flex items-center text-xs sm:text-sm text-muted-foreground">
-            <ImageIcon className="w-4 h-4 mr-1" />
-            JPG, PNG, or WEBP
-          </div>
         </div>
       </div>
     </Card>
