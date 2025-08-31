@@ -138,7 +138,7 @@ const App = () => {
           {appState === 'upload' && (
             <div className="w-full max-w-2xl px-4 space-y-4">
               <FileUpload onFileSelect={handleFileSelect} />
-              <p className="text-sm text-muted-foreground text-center font-semibold">
+              <p className="text-sm text-center font-semibold bg-gradient-to-r from-orange-800 via-red-700 to-red-800 bg-clip-text text-transparent">
                 Perfect for your vintage wedding photos and family memories.
               </p>
             </div>
