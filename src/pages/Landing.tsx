@@ -44,7 +44,7 @@ const Landing = () => {
             <div className="w-10 h-10 bg-gradient-warm rounded-xl flex items-center justify-center shadow-glow">
               <Palette className="w-5 h-5 text-primary-foreground" />
             </div>
-            <h1 className="text-2xl font-bold text-foreground">RangMantra</h1>
+            <h1 className="text-2xl font-bold text-foreground"><span className="text-primary">Rang</span>Mantra</h1>
           </div>
           <Button
             variant="outline"
@@ -70,7 +70,7 @@ const Landing = () => {
           
           <p className="text-lg sm:text-xl text-foreground/70 max-w-3xl mx-auto mb-8 leading-relaxed animate-fade-in">
             Transform your precious vintage wedding photos and family memories into stunning colored masterpieces. 
-            Perfect for bringing decades-old memories back to life with AI-powered colorization.
+            Perfect for bringing decades-old memories back to life.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
@@ -83,10 +83,6 @@ const Landing = () => {
               Experience for Free
               <ArrowRight className="w-5 h-5" />
             </Button>
-            <div className="text-sm text-foreground/60 flex items-center gap-2">
-              <Shield className="w-4 h-4" />
-              No credit card required
-            </div>
           </div>
         </div>
 
@@ -102,7 +98,7 @@ const Landing = () => {
                   style={{ maxHeight: 'none' }}
                 />
               </div>
-              <p className="text-xs sm:text-sm text-muted-foreground mt-2">Before</p>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-2 font-bold">Before</p>
             </div>
             <div className="text-center">
               <div className="w-full">
@@ -113,7 +109,7 @@ const Landing = () => {
                   style={{ maxHeight: 'none' }}
                 />
               </div>
-              <p className="text-xs sm:text-sm text-muted-foreground mt-2">After</p>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-2 font-bold">After</p>
             </div>
           </div>
         </div>
