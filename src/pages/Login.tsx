@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Mail, ArrowLeft } from "lucide-react";
+import { Mail, ArrowLeft, Palette } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -134,11 +134,19 @@ const Login = () => {
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-gradient-warm rounded-xl flex items-center justify-center shadow-glow">
-              <Mail className="w-6 h-6 text-primary-foreground" />
+              <Palette className="w-6 h-6 text-primary-foreground" />
             </div>
-            <h1 className="text-3xl font-bold text-foreground">
-              Login
-            </h1>
+            <div className="flex items-end gap-1">
+              <h1 className="text-3xl font-bold text-foreground leading-none"><span className="text-orange-600">Ran</span><span className="text-orange-600">g</span>Mantra</h1>
+              <a 
+                href="https://indrasol.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 leading-none mb-0.5"
+              >
+                by Indrasol
+              </a>
+            </div>
           </div>
           <p className="text-foreground/70">
             {state === 'email' 
