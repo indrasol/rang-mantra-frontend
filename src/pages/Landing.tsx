@@ -177,7 +177,7 @@ const Landing = () => {
             <ArrowRight className="w-5 h-5" />
           </Button>
           <p className="text-sm text-foreground/60">
-            No sign-up fees • Instant results • Your memories, beautifully restored
+            Instant results • Your memories, beautifully restored
           </p>
         </Card>
       </section>
