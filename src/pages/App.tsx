@@ -125,7 +125,7 @@ const App = () => {
                 className="gap-2 transition-all duration-300 hover:scale-105"
               >
                 <LogOut className="w-4 h-4" />
-                Logout
+                <span className="hidden sm:inline">Logout</span>
               </Button>
             </div>
           </div>
@@ -134,10 +134,9 @@ const App = () => {
           </p>
         </header>
 
-        {/* Main Content */}
-        <main className="max-w-4xl mx-auto flex-1">
+        <main className="max-w-4xl mx-auto flex-1 flex flex-col items-center justify-start">
           {appState === 'upload' && (
-            <div className="space-y-8 sm:space-y-12">
+            <div className="w-full max-w-2xl">
               <FileUpload onFileSelect={handleFileSelect} />
             </div>
           )}
