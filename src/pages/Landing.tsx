@@ -56,15 +56,7 @@ const Landing = () => {
               </a>
             </div>
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => navigate('/login')}
-            className="gap-2 transition-all duration-300 hover:scale-105"
-          >
-            <LogIn className="w-4 h-4" />
-            Login
-          </Button>
+          <div></div>
         </div>
       </nav>
 
