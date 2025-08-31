@@ -44,7 +44,17 @@ const Landing = () => {
             <div className="w-10 h-10 bg-gradient-warm rounded-xl flex items-center justify-center shadow-glow">
               <Palette className="w-5 h-5 text-primary-foreground" />
             </div>
-            <h1 className="text-2xl font-bold text-foreground"><span className="text-orange-600">Ran</span><span className="text-orange-600">g</span>Mantra</h1>
+            <div className="flex items-center gap-2">
+              <h1 className="text-2xl font-bold text-foreground"><span className="text-orange-600">Ran</span><span className="text-orange-600">g</span>Mantra</h1>
+              <a 
+                href="https://indrasol.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+              >
+                by Indrasol
+              </a>
+            </div>
           </div>
           <Button
             variant="outline"
