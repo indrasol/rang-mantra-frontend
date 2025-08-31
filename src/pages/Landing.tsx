@@ -61,14 +61,10 @@ const Landing = () => {
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-12 sm:py-20">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6 animate-fade-in">
-            <Sparkles className="w-4 h-4" />
-            Transform Your Memories with AI
-          </div>
           
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight animate-fade-in">
             Bring Your
-            <span className="bg-gradient-warm bg-clip-text text-transparent"> Black & White </span>
+            <span className="text-muted-foreground"> Black & White </span>
             Photos to Life
           </h1>
           
@@ -96,23 +92,23 @@ const Landing = () => {
 
         {/* Hero Image */}
         <div className="relative max-w-4xl mx-auto animate-fade-in">
-          <Card className="overflow-hidden shadow-warm bg-card/95 backdrop-blur-sm border-primary/20">
-            <div className="grid md:grid-cols-2 gap-6 p-6">
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-center">Before</h3>
+          <Card className="overflow-hidden shadow-warm bg-card/95 backdrop-blur-sm border-primary/20 p-6">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="text-center">
                 <img 
                   src={beforeImage} 
                   alt="Original black and white wedding photo"
-                  className="rounded-lg shadow-warm w-full h-64 object-cover transition-transform duration-300 hover:scale-105"
+                  className="rounded-lg shadow-warm w-full h-32 sm:h-48 object-cover"
                 />
+                <p className="text-xs sm:text-sm text-muted-foreground mt-2">Before</p>
               </div>
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-center">After</h3>
+              <div className="text-center">
                 <img 
                   src={afterImage} 
                   alt="AI colorized wedding photo"
-                  className="rounded-lg shadow-warm w-full h-64 object-cover transition-transform duration-300 hover:scale-105"
+                  className="rounded-lg shadow-warm w-full h-32 sm:h-48 object-cover"
                 />
+                <p className="text-xs sm:text-sm text-muted-foreground mt-2">After</p>
               </div>
             </div>
           </Card>
@@ -121,14 +117,6 @@ const Landing = () => {
 
       {/* Features Section */}
       <section className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            Why Choose RangMantra?
-          </h2>
-          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-            Advanced AI technology meets intuitive design to deliver stunning results
-          </p>
-        </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <Card className="p-6 text-center space-y-4 shadow-warm bg-card/95 backdrop-blur-sm border-primary/20 transition-transform duration-300 hover:scale-105">
@@ -137,7 +125,7 @@ const Landing = () => {
             </div>
             <h3 className="text-xl font-semibold text-foreground">Lightning Fast</h3>
             <p className="text-foreground/70">
-              Get your colorized photos in seconds, not hours. Our AI processes images instantly.
+              Get your colorized photos in seconds, not hours
             </p>
           </Card>
 
@@ -157,7 +145,7 @@ const Landing = () => {
             </div>
             <h3 className="text-xl font-semibold text-foreground">Made with Love</h3>
             <p className="text-foreground/70">
-              Specially designed for wedding photos and family memories that matter most to you.
+              Specially to add color to your vintage and old wedding photos and family memories that matter most to you.
             </p>
           </Card>
         </div>
@@ -167,11 +155,8 @@ const Landing = () => {
       <section className="container mx-auto px-4 py-16">
         <Card className="p-8 sm:p-12 text-center space-y-6 shadow-warm bg-gradient-nostalgic/10 border-primary/20 max-w-4xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-            Ready to Transform Your Memories?
+            Ready to Add Color to Your Memories?
           </h2>
-          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-            Join thousands of families who have already brought their cherished black & white photos back to life.
-          </p>
           <Button
             size="lg"
             variant="hero"
