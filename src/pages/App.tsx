@@ -114,7 +114,7 @@ const App = () => {
                 <Palette className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
-                <span className="bg-gradient-to-r from-orange-700 via-red-600 via-yellow-600 to-orange-800 bg-clip-text text-transparent">Rang</span>Mantra
+                <span className="bg-gradient-to-r from-orange-800 via-red-700 to-red-800 bg-clip-text text-transparent">Rang</span>Mantra
               </h1>
             </div>
             <div className="flex-1 flex justify-end gap-2">
