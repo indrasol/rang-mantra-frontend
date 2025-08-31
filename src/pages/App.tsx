@@ -171,7 +171,7 @@ const App = () => {
 
         {/* Footer */}
         <footer className="text-center pt-6 sm:pt-8 border-t border-border/50 mt-auto">
-          <p className="text-xs sm:text-sm text-muted-foreground px-4">
+          <p className="text-xs sm:text-sm text-muted-foreground px-4 font-semibold">
             Made with <Heart className="w-4 h-4 inline text-red-500" /> to preserve and revive your precious memories
           </p>
         </footer>
