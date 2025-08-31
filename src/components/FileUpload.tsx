@@ -91,10 +91,6 @@ export const FileUpload = ({ onFileSelect, isProcessing }: FileUploadProps) => {
             JPG, PNG, or WEBP
           </div>
         </div>
-
-        <p className="text-xs sm:text-sm text-muted-foreground text-center">
-          Perfect for vintage wedding photos and family memories.
-        </p>
       </div>
     </Card>
   );
