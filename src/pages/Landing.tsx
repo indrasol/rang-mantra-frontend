@@ -44,7 +44,7 @@ const Landing = () => {
             <div className="w-10 h-10 bg-gradient-warm rounded-xl flex items-center justify-center shadow-glow">
               <Palette className="w-5 h-5 text-primary-foreground" />
             </div>
-            <h1 className="text-2xl font-bold text-foreground"><span className="text-orange-600">Ran</span><span className="bg-gradient-to-r from-orange-500 via-red-500 via-yellow-500 to-orange-600 bg-clip-text text-transparent">g</span>Mantra</h1>
+            <h1 className="text-2xl font-bold text-foreground"><span className="text-orange-600">Ran</span><span className="text-orange-600">g</span>Mantra</h1>
           </div>
           <Button
             variant="outline"
