@@ -44,7 +44,7 @@ const Landing = () => {
             <div className="w-10 h-10 bg-gradient-warm rounded-xl flex items-center justify-center shadow-glow">
               <Palette className="w-5 h-5 text-primary-foreground" />
             </div>
-            <div className="flex items-end gap-2">
+            <div className="flex items-end gap-1">
               <h1 className="text-2xl font-bold text-foreground leading-none"><span className="text-orange-600">Ran</span><span className="text-orange-600">g</span>Mantra</h1>
               <a 
                 href="https://indrasol.com" 
