@@ -97,7 +97,7 @@ const Landing = () => {
               <img 
                 src={beforeImage} 
                 alt="Original black and white wedding photo"
-                className="w-full h-48 sm:h-64 object-cover"
+                className="w-full h-auto object-contain"
               />
               <p className="text-xs sm:text-sm text-muted-foreground mt-2">Before</p>
             </div>
@@ -105,7 +105,7 @@ const Landing = () => {
               <img 
                 src={afterImage} 
                 alt="AI colorized wedding photo"
-                className="w-full h-48 sm:h-64 object-cover"
+                className="w-full h-auto object-contain"
               />
               <p className="text-xs sm:text-sm text-muted-foreground mt-2">After</p>
             </div>
