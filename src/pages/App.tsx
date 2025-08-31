@@ -134,9 +134,9 @@ const App = () => {
           </p>
         </header>
 
-        <main className="max-w-4xl mx-auto flex-1 flex flex-col items-center justify-start">
+        <main className="flex-1 flex items-center justify-center">
           {appState === 'upload' && (
-            <div className="w-full max-w-2xl">
+            <div className="w-full max-w-2xl px-4">
               <FileUpload onFileSelect={handleFileSelect} />
             </div>
           )}
