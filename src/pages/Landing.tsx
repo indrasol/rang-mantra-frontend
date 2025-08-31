@@ -50,7 +50,7 @@ const Landing = () => {
                 href="https://indrasol.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 leading-none"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 leading-none mb-0.5"
               >
                 by Indrasol
               </a>
