@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Sparkles, Heart, Clock, Palette } from "lucide-react";
+import { Sparkles, Heart, Clock, Palette, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { FileUpload } from "@/components/FileUpload";
 import { ProcessingStatus } from "@/components/ProcessingStatus";
@@ -13,6 +14,7 @@ type AppState = 'upload' | 'processing' | 'complete';
 type ProcessingStage = 'analyzing' | 'colorizing' | 'enhancing' | 'complete';
 
 const Index = () => {
+  const navigate = useNavigate();
   const [appState, setAppState] = useState<AppState>('upload');
   const [processingStage, setProcessingStage] = useState<ProcessingStage>('analyzing');
   const [progress, setProgress] = useState(0);
@@ -66,13 +68,27 @@ const Index = () => {
       <div className="container mx-auto px-4 py-6 sm:py-8">
         {/* Header */}
         <header className="text-center mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-warm rounded-xl flex items-center justify-center shadow-glow">
-              <Palette className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
+          <div className="flex justify-between items-start mb-4 sm:mb-6">
+            <div className="flex-1"></div>
+            <div className="inline-flex items-center gap-2 sm:gap-3">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-warm rounded-xl flex items-center justify-center shadow-glow">
+                <Palette className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
+              </div>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800">
+                RangMantra
+              </h1>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800">
-              RangMantra
-            </h1>
+            <div className="flex-1 flex justify-end">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => navigate('/login')}
+                className="gap-2 transition-all duration-300 hover:scale-105"
+              >
+                <LogIn className="w-4 h-4" />
+                Login
+              </Button>
+            </div>
           </div>
           <p className="text-base sm:text-xl text-foreground/80 max-w-2xl mx-auto leading-relaxed px-4">
             Transform your cherished black & white memories into vibrant colored moments
