@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react";
-import { Sparkles, Heart, Clock, Palette, LogIn, ArrowRight, Star, Zap, Shield } from "lucide-react";
+import { ArrowRight, Clock, Heart, LogIn, Palette, Shield, Sparkles, Star, Zap } from "lucide-react";
+import { useEffect, useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
+import { PhotoCollage } from "@/components/PhotoCollage";
 import { User } from "@supabase/supabase-js";
-import heroImage from "@/assets/hero-transformation.jpg";
-import beforeImage from "@/assets/before-bw.jpg";
-import afterImage from "@/assets/after-color.jpg";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -60,58 +59,57 @@ const Landing = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-12 sm:py-20">
-        <div className="text-center mb-12">
-          
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight animate-fade-in">
-            Bring Your
-            <span className="text-muted-foreground"> Black & White </span>
-            Photos to Life
-          </h1>
-          
-          <p className="text-lg sm:text-xl text-foreground/70 max-w-3xl mx-auto mb-8 leading-relaxed animate-fade-in">
-            Transform your precious vintage wedding photos and family memories into stunning colored masterpieces. 
-            Perfect for bringing decades-old memories back to life.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
-            <Button
-              size="lg"
-              variant="hero"
-              onClick={() => navigate('/login')}
-              className="gap-3 text-lg px-8 py-4 h-14 font-semibold transition-all duration-300 hover:scale-105 hover:shadow-glow"
-            >
-              Experience for Free
-              <ArrowRight className="w-5 h-5" />
-            </Button>
+      {/* Hero Section - Split Screen Design */}
+      <section className="min-h-screen flex flex-col">
+        {/* Header Content */}
+        <div className="container mx-auto px-4 py-8 sm:py-10">
+          <div className="text-center mb-8 sm:mb-10">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6 leading-tight animate-fade-in">
+              Bring Your
+              <span className="text-muted-foreground"> Black & White </span>
+              Photos to Life
+            </h1>
+            
+            <p className="text-base sm:text-lg text-foreground/70 max-w-2xl mx-auto mb-6 sm:mb-8 leading-relaxed animate-fade-in">
+              Transform your precious vintage wedding photos and family memories into stunning colored masterpieces. 
+              Perfect for bringing decades-old memories back to life.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
+              <Button
+                size="lg"
+                variant="hero"
+                onClick={() => navigate('/login')}
+                className="gap-3 text-lg px-8 py-4 h-14 font-semibold transition-all duration-300 hover:scale-105 hover:shadow-glow"
+              >
+                Experience for Free
+                <ArrowRight className="w-5 h-5" />
+              </Button>
+            </div>
           </div>
         </div>
 
-        {/* Hero Image */}
-        <div className="relative max-w-6xl mx-auto animate-fade-in">
-          <div className="grid grid-cols-2 gap-0">
-            <div className="text-center">
-              <div className="w-full">
-                <img 
-                  src={beforeImage} 
-                  alt="Original black and white wedding photo"
-                  className="w-full max-w-full h-auto object-contain"
-                  style={{ maxHeight: 'none' }}
-                />
-              </div>
-              <p className="text-xs sm:text-sm text-muted-foreground mt-2 font-bold">Before</p>
+        {/* Split Screen Photo Collage */}
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[400px] sm:min-h-[450px] lg:min-h-[500px]">
+          {/* Left Side - Black & White */}
+          <div className="bg-gray-900 flex flex-col animate-slide-in-left">
+            <div className="p-4 sm:p-6 text-center">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">Before</h2>
+              <p className="text-gray-300 text-sm sm:text-base">Your precious memories in black & white</p>
             </div>
-            <div className="text-center">
-              <div className="w-full">
-                <img 
-                  src={afterImage} 
-                  alt="AI colorized wedding photo"
-                  className="w-full max-w-full h-auto object-contain"
-                  style={{ maxHeight: 'none' }}
-                />
-              </div>
-              <p className="text-xs sm:text-sm text-muted-foreground mt-2 font-bold">After</p>
+            <div className="flex-1 overflow-hidden">
+              <PhotoCollage variant="bw" layout="masonry" className="h-full animate-scale-in" />
+            </div>
+          </div>
+
+          {/* Right Side - Color */}
+          <div className="bg-gradient-to-br from-orange-500 to-red-600 flex flex-col animate-slide-in-right">
+            <div className="p-4 sm:p-6 text-center">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">After</h2>
+              <p className="text-orange-100 text-sm sm:text-base">Brought back to life with vibrant colors</p>
+            </div>
+            <div className="flex-1 overflow-hidden">
+              <PhotoCollage variant="color" layout="masonry" className="h-full animate-scale-in" />
             </div>
           </div>
         </div>
