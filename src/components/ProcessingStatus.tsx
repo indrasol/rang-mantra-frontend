@@ -1,27 +1,29 @@
-import { Loader2, Sparkles, Palette, ImageIcon } from "lucide-react";
+import { ImageIcon, Loader2, Palette, Sparkles } from "lucide-react";
+
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 
 interface ProcessingStatusProps {
   stage: 'analyzing' | 'colorizing' | 'enhancing' | 'complete';
   progress: number;
+  processingTime?: number; // Time in seconds since processing started
 }
 
 const stages = {
   analyzing: {
     icon: ImageIcon,
-    title: "Analyzing Your Memory",
-    description: "Understanding the composition and details..."
+    title: "Uploading & Processing",
+    description: "Uploading your photo and preparing for colorization..."
   },
   colorizing: {
     icon: Palette,
-    title: "Adding Life & Color",
-    description: "Bringing your moment back to life..."
+    title: "AI Colorization in Progress",
+    description: "Our AI is bringing your memory back to life..."
   },
   enhancing: {
     icon: Sparkles,
-    title: "Enhancing Details",
-    description: "Adding final touches and refinements..."
+    title: "Finalizing Results",
+    description: "Adding final touches and preparing your colorized photo..."
   },
   complete: {
     icon: Sparkles,
@@ -30,7 +32,7 @@ const stages = {
   }
 };
 
-export const ProcessingStatus = ({ stage, progress }: ProcessingStatusProps) => {
+export const ProcessingStatus = ({ stage, progress, processingTime }: ProcessingStatusProps) => {
   const currentStage = stages[stage];
   const Icon = currentStage.icon;
   
@@ -56,6 +58,11 @@ export const ProcessingStatus = ({ stage, progress }: ProcessingStatusProps) => 
       <div className="space-y-2">
         <Progress value={progress} className="h-2" />
         <p className="text-xs sm:text-sm text-muted-foreground">{progress}% complete</p>
+        {processingTime && processingTime > 30 && stage === 'colorizing' && (
+          <p className="text-xs text-amber-600 font-medium">
+            ⏱️ Processing time: {processingTime}s (this may take up to 60 seconds)
+          </p>
+        )}
       </div>
     </Card>
   );

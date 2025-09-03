@@ -1,31 +1,20 @@
-import { useState, useEffect, useCallback } from "react";
-import { Sparkles, Heart, Clock, Palette, LogOut } from "lucide-react";
+import { Heart, LogOut, Palette } from "lucide-react";
+import { ColorizationAPI, ColorizeResponse } from "@/services/colorizationApi";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import { User } from "@supabase/supabase-js";
-import { useToast } from "@/hooks/use-toast";
 import { FileUpload } from "@/components/FileUpload";
-import { ProcessingStatus } from "@/components/ProcessingStatus";
 import { ImageComparison } from "@/components/ImageComparison";
-import heroImage from "@/assets/hero-transformation.jpg";
-import beforeImage from "@/assets/before-bw.jpg";
-import afterImage from "@/assets/after-color.jpg";
+import { ProcessingStatus } from "@/components/ProcessingStatus";
+import { User } from "@supabase/supabase-js";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 type AppState = 'upload' | 'processing' | 'complete';
 type ProcessingStage = 'analyzing' | 'colorizing' | 'enhancing' | 'complete';
 
-// Define the API URL based on environment
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/v1';
-
-interface ColorizeResponse {
-  request_id: string;
-  status: 'processing' | 'complete' | 'failed';
-  original_url: string;
-  colorized_url?: string;
-  error_message?: string;
-}
+// Using ColorizationAPI service for endpoints and polling
 
 const App = () => {
   const navigate = useNavigate();
@@ -37,8 +26,7 @@ const App = () => {
   const [originalImage, setOriginalImage] = useState<string>('');
   const [colorizedImage, setColorizedImage] = useState<string>('');
   const [isUploading, setIsUploading] = useState(false);
-  const [requestId, setRequestId] = useState<string>('');
-  const [statusCheckInterval, setStatusCheckInterval] = useState<number | null>(null);
+  const [processingStartTime, setProcessingStartTime] = useState<number | null>(null);
 
   // Auth protection
   useEffect(() => {
@@ -65,164 +53,76 @@ const App = () => {
   const handleFileSelect = async (file: File) => {
     try {
       setIsUploading(true);
-      
-      // First set local preview of original image
+      // Show original image immediately
       const imageUrl = URL.createObjectURL(file);
       setOriginalImage(imageUrl);
       setAppState('processing');
+      setProcessingStage('analyzing');
+      setProgress(0);
+      setProcessingStartTime(Date.now());
+
+      // Upload to colorization API
+      const uploadResponse = await ColorizationAPI.uploadImage(file);
       
-      // Create form data for file upload
-      const formData = new FormData();
-      formData.append('file', file);
-      
-      if (!user?.id) {
-        throw new Error('User ID not available');
-      }
-      
-      formData.append('user_id', user.id);
-      if (user.email) {
-        formData.append('user_email', user.email);
-      }
-      
-      // Get the JWT token for authentication
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      // Send the image to our API
-      const response = await fetch(`${API_URL}/colorize/upload`, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Authorization': `Bearer ${session?.access_token || ''}`,
+      // Start polling for status with timeout limits
+      ColorizationAPI.pollStatus(
+        uploadResponse.request_id,
+        (status: ColorizeResponse) => {
+          if (status.status === 'processing') {
+            setProgress(75);
+            setProcessingStage('colorizing');
+          }
         },
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Failed to upload image');
-      }
-      
-      const data: ColorizeResponse = await response.json();
-      
-      // Start tracking the status
-      setRequestId(data.request_id);
-      setOriginalImage(data.original_url);
-      
-      // Set up status checking
-      startStatusCheck(data.request_id);
-      
-      // Start the progress animation
-      simulateProgressAnimation();
-      
+        (result: ColorizeResponse) => {
+          if (result.colorized_url) {
+            setColorizedImage(result.colorized_url);
+            setProcessingStage('complete');
+            setProgress(100);
+            setAppState('complete');
+          } else {
+            toast({
+              title: "Colorization Failed",
+              description: "No colorized image URL received",
+              variant: "destructive",
+            });
+            setAppState('upload');
+          }
+          setIsUploading(false);
+        },
+        (error: string) => {
+          toast({
+            title: "Colorization Failed",
+            description: error,
+            variant: "destructive",
+          });
+          setAppState('upload');
+          setProcessingStartTime(null);
+          setIsUploading(false);
+        },
+        1000,
+        60,
+        60000
+      );
     } catch (error) {
+      console.error('Upload failed:', error);
       toast({
-        title: "Upload failed",
+        title: "Upload Failed",
         description: error instanceof Error ? error.message : "Failed to upload image",
         variant: "destructive",
       });
-      
-      // Reset to upload state
-      handleNewPhoto();
-    } finally {
+      setAppState('upload');
+      setProcessingStartTime(null);
       setIsUploading(false);
     }
   };
 
-  const simulateProgressAnimation = useCallback(() => {
-    // Simulate progress animation for UX purposes
-    // Real status comes from API checks
-    const stages: ProcessingStage[] = ['analyzing', 'colorizing', 'enhancing', 'complete'];
-    let currentStageIndex = 0;
-    let currentProgress = 0;
-
-    const interval = window.setInterval(() => {
-      // Slower progression than before to match backend processing time
-      currentProgress += Math.random() * 8 + 2;
-      
-      if (currentProgress >= 100) {
-        currentStageIndex++;
-        if (currentStageIndex < stages.length - 1) { // Don't automatically complete
-          setProcessingStage(stages[currentStageIndex]);
-          currentProgress = 0;
-        } else {
-          // Max out at enhancing at 99% until we get actual completion from API
-          setProcessingStage('enhancing');
-          setProgress(99);
-          return;
-        }
-      }
-      
-      setProgress(Math.min(currentProgress, 99)); // Max 99% until real completion
-    }, 800);
-    
-    return interval;
-  }, []);
-  
-  const startStatusCheck = useCallback((requestId: string) => {
-    // Clear any existing interval
-    if (statusCheckInterval) {
-      window.clearInterval(statusCheckInterval);
-    }
-    
-    // Set up interval to check status every 2 seconds
-    const interval = window.setInterval(async () => {
-      try {
-        const response = await fetch(`${API_URL}/colorize/status/${requestId}`);
-        
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.detail || 'Failed to check status');
-        }
-        
-        const data: ColorizeResponse = await response.json();
-        
-        // Update UI based on status
-        if (data.status === 'complete' && data.colorized_url) {
-          // Clear interval once complete
-          window.clearInterval(interval);
-          setStatusCheckInterval(null);
-          
-          // Set the colorized image and complete state
-          setColorizedImage(data.colorized_url);
-          setProcessingStage('complete');
-          setProgress(100);
-          setAppState('complete');
-        } else if (data.status === 'failed') {
-          // Handle failure
-          window.clearInterval(interval);
-          setStatusCheckInterval(null);
-          
-          toast({
-            title: "Colorization failed",
-            description: data.error_message || "Failed to colorize image",
-            variant: "destructive",
-          });
-          
-          // Reset to upload state
-          handleNewPhoto();
-        }
-      } catch (error) {
-        console.error('Error checking status:', error);
-      }
-    }, 2000); // Check every 2 seconds
-    
-    setStatusCheckInterval(interval);
-    
-    return interval;
-  }, [toast, statusCheckInterval]);
-
   const handleNewPhoto = () => {
-    // Clear any status check interval
-    if (statusCheckInterval) {
-      window.clearInterval(statusCheckInterval);
-      setStatusCheckInterval(null);
-    }
-    
     setAppState('upload');
     setProcessingStage('analyzing');
     setProgress(0);
     setOriginalImage('');
     setColorizedImage('');
-    setRequestId('');
+    setProcessingStartTime(null);
   };
 
   const handleLogout = async () => {
@@ -281,7 +181,11 @@ const App = () => {
 
           {appState === 'processing' && (
             <div className="space-y-6 sm:space-y-8">
-              <ProcessingStatus stage={processingStage} progress={progress} />
+              <ProcessingStatus 
+                stage={processingStage} 
+                progress={progress} 
+                processingTime={processingStartTime ? Math.floor((Date.now() - processingStartTime) / 1000) : undefined}
+              />
               
               {originalImage && (
                 <Card className="overflow-hidden shadow-warm">
