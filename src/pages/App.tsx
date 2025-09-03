@@ -1,17 +1,16 @@
-import { useState, useEffect } from "react";
-import { Sparkles, Heart, Clock, Palette, LogOut } from "lucide-react";
+import { Clock, Heart, LogOut, Palette, Sparkles } from "lucide-react";
+import { ColorizationAPI, ColorizeResponse } from "@/services/colorizationApi";
+import { useEffect, useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import { User } from "@supabase/supabase-js";
-import { useToast } from "@/hooks/use-toast";
 import { FileUpload } from "@/components/FileUpload";
-import { ProcessingStatus } from "@/components/ProcessingStatus";
 import { ImageComparison } from "@/components/ImageComparison";
-import heroImage from "@/assets/hero-transformation.jpg";
-import beforeImage from "@/assets/before-bw.jpg";
-import afterImage from "@/assets/after-color.jpg";
+import { ProcessingStatus } from "@/components/ProcessingStatus";
+import { User } from "@supabase/supabase-js";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 type AppState = 'upload' | 'processing' | 'complete';
 type ProcessingStage = 'analyzing' | 'colorizing' | 'enhancing' | 'complete';
@@ -25,6 +24,7 @@ const App = () => {
   const [progress, setProgress] = useState(0);
   const [originalImage, setOriginalImage] = useState<string>('');
   const [colorizedImage, setColorizedImage] = useState<string>('');
+  const [processingStartTime, setProcessingStartTime] = useState<number | null>(null);
 
   // Auth protection
   useEffect(() => {
@@ -48,38 +48,75 @@ const App = () => {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  const handleFileSelect = (file: File) => {
-    const imageUrl = URL.createObjectURL(file);
-    setOriginalImage(imageUrl);
-    setAppState('processing');
-    simulateProcessing();
-  };
+  const handleFileSelect = async (file: File) => {
+    try {
+      // Show original image immediately
+      const imageUrl = URL.createObjectURL(file);
+      setOriginalImage(imageUrl);
+      setAppState('processing');
+      setProcessingStage('analyzing');
+      setProgress(0);
+      setProcessingStartTime(Date.now());
 
-  const simulateProcessing = () => {
-    // Simulate processing stages
-    const stages: ProcessingStage[] = ['analyzing', 'colorizing', 'enhancing', 'complete'];
-    let currentStageIndex = 0;
-    let currentProgress = 0;
+      // Upload to colorization API
+      const uploadResponse = await ColorizationAPI.uploadImage(file);
+      
+      // Start polling for status with timeout limits
+      ColorizationAPI.pollStatus(
+        uploadResponse.request_id,
+        (status: ColorizeResponse) => {
+          // Update progress based on status
+          if (status.status === 'processing') {
+            setProgress(75); // Show progress while processing
+            setProcessingStage('colorizing'); // Move to colorizing stage
+          }
+        },
+        (result: ColorizeResponse) => {
+          // Colorization completed successfully
+          if (result.colorized_url) {
+            setColorizedImage(result.colorized_url);
+            setProcessingStage('complete');
+            setProgress(100);
+            setAppState('complete');
+            
+            toast({
+              title: "Colorization Complete!",
+              description: "Your photo has been successfully colorized.",
+            });
+          } else {
+            toast({
+              title: "Colorization Failed",
+              description: "No colorized image URL received",
+              variant: "destructive",
+            });
+            setAppState('upload');
+          }
+        },
+        (error: string) => {
+          // Colorization failed or timed out
+          toast({
+            title: "Colorization Failed",
+            description: error,
+            variant: "destructive",
+          });
+          setAppState('upload');
+          setProcessingStartTime(null);
+        },
+        1000, // Poll every 1 second
+        60,   // Max 60 retries (1 minute)
+        60000 // 60 second timeout
+      );
 
-    const interval = setInterval(() => {
-      currentProgress += Math.random() * 15 + 5;
-      
-      if (currentProgress >= 100) {
-        currentStageIndex++;
-        if (currentStageIndex < stages.length) {
-          setProcessingStage(stages[currentStageIndex]);
-          currentProgress = 0;
-        } else {
-          clearInterval(interval);
-          // For demo, use the hero image as colorized result
-          setColorizedImage(heroImage);
-          setAppState('complete');
-          return;
-        }
-      }
-      
-      setProgress(Math.min(currentProgress, 100));
-    }, 500);
+    } catch (error) {
+      console.error('Upload failed:', error);
+      toast({
+        title: "Upload Failed",
+        description: error instanceof Error ? error.message : "Failed to upload image",
+        variant: "destructive",
+      });
+      setAppState('upload');
+      setProcessingStartTime(null);
+    }
   };
 
   const handleNewPhoto = () => {
@@ -88,6 +125,7 @@ const App = () => {
     setProgress(0);
     setOriginalImage('');
     setColorizedImage('');
+    setProcessingStartTime(null);
   };
 
   const handleLogout = async () => {
@@ -146,7 +184,11 @@ const App = () => {
 
           {appState === 'processing' && (
             <div className="space-y-6 sm:space-y-8">
-              <ProcessingStatus stage={processingStage} progress={progress} />
+              <ProcessingStatus 
+                stage={processingStage} 
+                progress={progress} 
+                processingTime={processingStartTime ? Math.floor((Date.now() - processingStartTime) / 1000) : undefined}
+              />
               
               {originalImage && (
                 <Card className="overflow-hidden shadow-warm">
