@@ -15,15 +15,12 @@ const bwPhotos = [
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/original-images/6d49eaf2-f63f-452b-9656-38646ff3a145/f44a38a4-5da2-4c56-bfb3-5f58ef0cef94.png?",
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/original-images/6d49eaf2-f63f-452b-9656-38646ff3a145/21b66fa0-ae23-4020-949d-43a1fb969147.png", // Family portrait
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/original-images/6d49eaf2-f63f-452b-9656-38646ff3a145/1d1e8a9b-f453-43c9-ba1e-2ce890ee2663.png", // Traditional wedding
-  "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/original-images/6d49eaf2-f63f-452b-9656-38646ff3a145/4aea6d17-dbdc-490b-814b-bf02723f7396.png", // Bride portrait
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/original-images/6d49eaf2-f63f-452b-9656-38646ff3a145/825b88b4-46ea-48ba-ba91-e2ee147bd26a.png", // Groom portrait
-  "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/original-images/6d49eaf2-f63f-452b-9656-38646ff3a145/e7f91763-7d9e-46e4-903c-bacd55b97471.png", // Family group
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/original-images/6d49eaf2-f63f-452b-9656-38646ff3a145/8f4b37c6-70f0-4b97-ad41-f8342b541b6e.png", // Wedding ceremony
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/original-images/6d49eaf2-f63f-452b-9656-38646ff3a145/92e6b131-8306-4e1f-9229-093c57b18c51.png", // Traditional attire
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/original-images/6d49eaf2-f63f-452b-9656-38646ff3a145/1cc1140a-1ac5-47bc-9961-cbdefe7bf60a.png", // Couple portrait
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/original-images/6d49eaf2-f63f-452b-9656-38646ff3a145/0573389b-082f-4e3b-a10a-d428c5f808f7.png?", // Bride closeup
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/original-images/6d49eaf2-f63f-452b-9656-38646ff3a145/40dbbc8f-ecac-4e81-b7aa-6f1efe94e1fb.png?", // Wedding celebration
-  "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/original-images/6d49eaf2-f63f-452b-9656-38646ff3a145/0db62fe1-2f98-4dc3-8831-f8f47d69c35d.png", // Family moment
 ];
 
 // Color photos (After) - Replace these URLs with your colorized photo URLs
@@ -32,15 +29,12 @@ const colorPhotos = [
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/colorized-images/6d49eaf2-f63f-452b-9656-38646ff3a145/f44a38a4-5da2-4c56-bfb3-5f58ef0cef94_colorized.png?",
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/colorized-images/6d49eaf2-f63f-452b-9656-38646ff3a145/21b66fa0-ae23-4020-949d-43a1fb969147_colorized.png", // Family portrait (colorized)
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/colorized-images/6d49eaf2-f63f-452b-9656-38646ff3a145/e88e5ac0-c743-4a7e-beae-30f92668a40b_colorized.png", // Traditional wedding (colorized)
-  "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/colorized-images/6d49eaf2-f63f-452b-9656-38646ff3a145/4aea6d17-dbdc-490b-814b-bf02723f7396_colorized.png", // Bride portrait (colorized)
-  "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/colorized-images/6d49eaf2-f63f-452b-9656-38646ff3a145/825b88b4-46ea-48ba-ba91-e2ee147bd26a_colorized.png", // Groom portrait (colorized)
-  "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/colorized-images/6d49eaf2-f63f-452b-9656-38646ff3a145/8439945d-a39a-4938-b754-382b4b1afd0a_colorized.png", // Family group (colorized)
+  "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/colorized-images/6d49eaf2-f63f-452b-9656-38646ff3a145/44c3075d-a62b-461e-9d0f-ad688969e1af_colorized.png?",
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/colorized-images/6d49eaf2-f63f-452b-9656-38646ff3a145/8f4b37c6-70f0-4b97-ad41-f8342b541b6e_colorized.png", // Wedding ceremony (colorized)
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/colorized-images/6d49eaf2-f63f-452b-9656-38646ff3a145/92e6b131-8306-4e1f-9229-093c57b18c51_colorized.png", // Traditional attire (colorized)
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/colorized-images/6d49eaf2-f63f-452b-9656-38646ff3a145/1cc1140a-1ac5-47bc-9961-cbdefe7bf60a_colorized.png?", // Couple portrait (colorized)
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/colorized-images/6d49eaf2-f63f-452b-9656-38646ff3a145/0573389b-082f-4e3b-a10a-d428c5f808f7_colorized.png?", // Bride closeup (colorized)
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/colorized-images/6d49eaf2-f63f-452b-9656-38646ff3a145/40dbbc8f-ecac-4e81-b7aa-6f1efe94e1fb_colorized.png", // Wedding celebration (colorized)
-  "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/colorized-images/6d49eaf2-f63f-452b-9656-38646ff3a145/0db62fe1-2f98-4dc3-8831-f8f47d69c35d_colorized.png", // Family moment (colorized)
 ];
 
 // Default photos (for backward compatibility)
