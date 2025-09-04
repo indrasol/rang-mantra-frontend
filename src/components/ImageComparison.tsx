@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { Download, Share2, RefreshCw, Eye, EyeOff } from "lucide-react";
+import { Download, Eye, EyeOff, RefreshCw, Share2 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 interface ImageComparisonProps {
   originalImage: string;
@@ -63,11 +64,11 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
         <div className="relative">
           {showComparison ? (
             <div className="flex flex-col sm:grid sm:grid-cols-2 gap-0">
-              <div className="relative group">
+              <div className="relative group h-[400px] sm:h-[500px]">
                 <img 
                   src={originalImage} 
                   alt="Original black and white photo"
-                  className="w-full h-64 sm:h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                 <div className="absolute bottom-4 left-4">
@@ -77,11 +78,11 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
                 </div>
               </div>
               
-              <div className="relative group">
+              <div className="relative group h-[400px] sm:h-[500px]">
                 <img 
                   src={colorizedImage} 
                   alt="Colorized photo"
-                  className="w-full h-64 sm:h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-warm/0 group-hover:bg-gradient-warm/10 transition-all duration-300" />
                 <div className="absolute bottom-4 right-4">
@@ -92,11 +93,11 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
               </div>
             </div>
           ) : (
-            <div className="relative">
+            <div className="relative h-[400px] sm:h-[500px]">
               <img 
                 src={colorizedImage} 
                 alt="Colorized photo"
-                className="w-full h-64 sm:h-auto object-cover"
+                className="w-full h-full object-cover"
               />
               <div className="absolute top-4 right-4">
                 <span className="bg-gradient-warm text-primary-foreground px-3 py-1 rounded-full text-xs sm:text-sm font-medium shadow-glow">
