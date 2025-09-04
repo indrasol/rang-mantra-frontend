@@ -21,6 +21,7 @@ const bwPhotos = [
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/original-images/6d49eaf2-f63f-452b-9656-38646ff3a145/1cc1140a-1ac5-47bc-9961-cbdefe7bf60a.png", // Couple portrait
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/original-images/6d49eaf2-f63f-452b-9656-38646ff3a145/0573389b-082f-4e3b-a10a-d428c5f808f7.png?", // Bride closeup
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/original-images/6d49eaf2-f63f-452b-9656-38646ff3a145/40dbbc8f-ecac-4e81-b7aa-6f1efe94e1fb.png?", // Wedding celebration
+  "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/original-images/6d49eaf2-f63f-452b-9656-38646ff3a145/d86e6035-8431-4b2d-bc8d-17b470834621.png?",
 ];
 
 // Color photos (After) - Replace these URLs with your colorized photo URLs
@@ -35,6 +36,7 @@ const colorPhotos = [
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/colorized-images/6d49eaf2-f63f-452b-9656-38646ff3a145/1cc1140a-1ac5-47bc-9961-cbdefe7bf60a_colorized.png?", // Couple portrait (colorized)
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/colorized-images/6d49eaf2-f63f-452b-9656-38646ff3a145/0573389b-082f-4e3b-a10a-d428c5f808f7_colorized.png?", // Bride closeup (colorized)
   "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/colorized-images/6d49eaf2-f63f-452b-9656-38646ff3a145/40dbbc8f-ecac-4e81-b7aa-6f1efe94e1fb_colorized.png", // Wedding celebration (colorized)
+  "https://mfjxcvpvdmlunitptxnj.supabase.co/storage/v1/object/public/colorized-images/6d49eaf2-f63f-452b-9656-38646ff3a145/d86e6035-8431-4b2d-bc8d-17b470834621_colorized.png?",
 ];
 
 // Default photos (for backward compatibility)
