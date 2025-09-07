@@ -1,3 +1,4 @@
+
 import { Heart, LogOut, Palette } from "lucide-react";
 import { ColorizationAPI, EphemeralResponse } from "@/services/colorizationApi";
 import { useEffect, useState } from "react";
@@ -26,7 +27,6 @@ const App = () => {
   const [originalImage, setOriginalImage] = useState<string>('');
   const [colorizedImage, setColorizedImage] = useState<string>('');
   const [isUploading, setIsUploading] = useState(false);
-  const [processingStartTime, setProcessingStartTime] = useState<number | null>(null);
 
   // Auth protection
   useEffect(() => {

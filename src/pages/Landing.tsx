@@ -69,7 +69,6 @@ const Landing = () => {
               <span className="text-muted-foreground"> Black & White </span>
               Photos to Life
             </h1>
-            
             <div className="flex justify-center animate-fade-in">
               <div className="inline-flex items-start gap-2 sm:gap-3 px-3 py-2 sm:px-4 sm:py-2 rounded-2xl bg-gradient-warm/15 border border-primary/20 text-foreground shadow-warm backdrop-blur-sm max-w-3xl">
                 <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mt-0.5" />
@@ -98,8 +97,6 @@ const Landing = () => {
                 </div>
               </Card>
             </div>
-
-            {/* CTA moved below Privacy Card */}
             <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
               <Button
                 size="lg"
