@@ -17,8 +17,8 @@ const stages = {
   },
   colorizing: {
     icon: Palette,
-    title: "AI Colorization in Progress",
-    description: "Our AI is bringing your memory back to life..."
+    title: "Colorization in Progress",
+    description: "Please wait while we are bringing your memory back to life..."
   },
   enhancing: {
     icon: Sparkles,
@@ -47,7 +47,7 @@ export const ProcessingStatus = ({ stage, progress, processingTime }: Processing
       </div>
       
       <div className="space-y-2 sm:space-y-3">
-        <h3 className="text-lg sm:text-xl font-semibold bg-gradient-warm bg-clip-text text-transparent">
+        <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-orange-800 via-red-700 to-red-800 bg-clip-text text-transparent">
           {currentStage.title}
         </h3>
         <p className="text-sm sm:text-base text-muted-foreground px-4">

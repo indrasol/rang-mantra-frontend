@@ -1,5 +1,5 @@
 import { Heart, LogOut, Palette } from "lucide-react";
-import { ColorizationAPI, ColorizeResponse } from "@/services/colorizationApi";
+import { ColorizationAPI, EphemeralResponse } from "@/services/colorizationApi";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -34,7 +34,7 @@ const App = () => {
       if (session?.user) {
         setUser(session.user);
       } else {
-        navigate('/login');
+        navigate('/');
       }
     });
 
@@ -43,7 +43,7 @@ const App = () => {
         setUser(session.user);
       } else {
         setUser(null);
-        navigate('/login');
+        navigate('/');
       }
     });
 
@@ -54,61 +54,41 @@ const App = () => {
     try {
       setIsUploading(true);
       // Show original image immediately
-      const imageUrl = URL.createObjectURL(file);
-      setOriginalImage(imageUrl);
+      const origUrl = URL.createObjectURL(file);
+      setOriginalImage(origUrl);
       setAppState('processing');
-      setProcessingStage('analyzing');
-      setProgress(0);
-      setProcessingStartTime(Date.now());
+      setProcessingStage('colorizing');
+      setProgress(50);
 
-      // Upload to colorization API
-      const uploadResponse = await ColorizationAPI.uploadImage(file);
-      
-      // Start polling for status with timeout limits
-      ColorizationAPI.pollStatus(
-        uploadResponse.request_id,
-        (status: ColorizeResponse) => {
-          if (status.status === 'processing') {
-            setProgress(75);
-            setProcessingStage('colorizing');
-          }
-        },
-        (result: ColorizeResponse) => {
-          if (result.colorized_url) {
-            setColorizedImage(result.colorized_url);
-            setProcessingStage('complete');
-            setProgress(100);
-            setAppState('complete');
-          } else {
-            toast({
-              title: "Colorization Failed",
-              description: "No colorized image URL received",
-              variant: "destructive",
-            });
-            setAppState('upload');
-          }
-          setIsUploading(false);
-        },
-        (error: string) => {
-          toast({
-            title: "Colorization Failed",
-            description: error,
-            variant: "destructive",
-          });
-          setAppState('upload');
-          setProcessingStartTime(null);
-          setIsUploading(false);
-        },
-        1000,
-        60,
-        60000
-      );
-    } catch (error) {
-      console.error('Upload failed:', error);
+      // Call new in-memory colorization API
+      const resp: EphemeralResponse = await ColorizationAPI.colorizeEphemeral(file);
+
+      // Helper to convert base64 => Blob => object URL
+      const b64ToUrl = (b64: string): string => {
+        const byteStr = atob(b64);
+        const len = byteStr.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) bytes[i] = byteStr.charCodeAt(i);
+        const blob = new Blob([bytes], { type: 'image/jpeg' });
+        return URL.createObjectURL(blob);
+      };
+
+      const colorUrl = b64ToUrl(resp.colorized_base64);
+      setColorizedImage(colorUrl);
+      setProcessingStage('complete');
+      setProgress(100);
+      setAppState('complete');
+      setIsUploading(false);
       toast({
-        title: "Upload Failed",
-        description: error instanceof Error ? error.message : "Failed to upload image",
-        variant: "destructive",
+        title: 'Colorization Complete!',
+        description: 'Your photo has been successfully colorized.',
+      });
+    } catch (error) {
+      console.error('Colorization failed:', error);
+      toast({
+        title: 'Colorization Failed',
+        description: error instanceof Error ? error.message : 'Failed to colorize image',
+        variant: 'destructive',
       });
       setAppState('upload');
       setProcessingStartTime(null);
@@ -126,11 +106,20 @@ const App = () => {
   };
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    toast({
-      title: "Logged out",
-      description: "You've been logged out successfully",
-    });
+    try {
+      await supabase.auth.signOut();
+      navigate('/');
+      toast({
+        title: "Logged out",
+        description: "You've been logged out successfully",
+      });
+    } catch (e) {
+      toast({
+        title: "Logout failed",
+        description: e instanceof Error ? e.message : 'Please try again',
+        variant: 'destructive',
+      });
+    }
   };
 
   if (!user) {
@@ -188,11 +177,11 @@ const App = () => {
               />
               
               {originalImage && (
-                <Card className="overflow-hidden shadow-warm">
+                <Card className="overflow-hidden bg-transparent border-none shadow-none p-0">
                   <img 
                     src={originalImage} 
                     alt="Your uploaded photo"
-                    className="w-full h-64 sm:h-auto object-cover sm:max-h-96"
+                    className="w-full max-h-96 object-contain"
                   />
                 </Card>
               )}
