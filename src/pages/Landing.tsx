@@ -69,13 +69,35 @@ const Landing = () => {
               <span className="text-muted-foreground"> Black & White </span>
               Photos to Life
             </h1>
+            <div className="flex justify-center animate-fade-in">
+              <div className="inline-flex items-start gap-2 sm:gap-3 px-3 py-2 sm:px-4 sm:py-2 rounded-2xl bg-gradient-warm/15 border border-primary/20 text-foreground shadow-warm backdrop-blur-sm max-w-3xl">
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mt-0.5" />
+                <span className="text-sm sm:text-base leading-relaxed text-foreground/80 font-medium">
+                  Transform your precious vintage wedding photos and family memories into stunning colored masterpieces. Perfect for bringing decades-old memories back to life.
+                </span>
+              </div>
+            </div>
+            <div className="h-6 sm:h-8" />
             
-            <p className="text-base sm:text-lg text-foreground/70 max-w-2xl mx-auto mb-6 sm:mb-8 leading-relaxed animate-fade-in">
-              Transform your precious vintage wedding photos and family memories into stunning colored masterpieces. 
-              Perfect for bringing decades-old memories back to life.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
+            {/* Privacy Card */}
+            <div className="mt-4 sm:mt-6 max-w-3xl mx-auto animate-fade-in">
+              <Card className="p-4 sm:p-5 bg-gradient-warm/10 border-primary/20 shadow-warm backdrop-blur-sm">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-black/20 flex items-center justify-center">
+                    <Shield className="w-4 h-4 text-primary-foreground" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-sm sm:text-base font-semibold text-foreground">
+                      Your privacy, guaranteed
+                    </p>
+                    <p className="text-sm sm:text-base leading-relaxed text-foreground/80 font-medium">
+                      We never store your photos. Processed securely — nothing is saved after colorization.
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            </div>
+            <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
               <Button
                 size="lg"
                 variant="hero"
@@ -151,6 +173,8 @@ const Landing = () => {
         </div>
       </section>
 
+      
+
       {/* CTA Section */}
       <section className="container mx-auto px-4 py-16">
         <Card className="p-8 sm:p-12 text-center space-y-6 shadow-warm bg-gradient-nostalgic/10 border-primary/20 max-w-4xl mx-auto">
@@ -166,7 +190,7 @@ const Landing = () => {
             Add Color to your Memory
             <ArrowRight className="w-5 h-5" />
           </Button>
-          <p className="text-sm text-foreground/60">
+          <p className="text-sm sm:text-base leading-relaxed text-foreground/80 font-medium">
             Instant results • Your memories, beautifully restored
           </p>
         </Card>
@@ -175,7 +199,7 @@ const Landing = () => {
       {/* Footer */}
       <footer className="container mx-auto px-4 py-8 border-t border-border/50">
         <div className="text-center">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm sm:text-base leading-relaxed text-foreground/80 font-medium">
             Made with <Heart className="w-4 h-4 inline text-red-500" /> to preserve and revive your precious memories
           </p>
         </div>

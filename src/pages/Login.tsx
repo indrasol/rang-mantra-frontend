@@ -137,7 +137,7 @@ const Login = () => {
               <Palette className="w-6 h-6 text-primary-foreground" />
             </div>
             <div className="flex items-end gap-1">
-              <h1 className="text-3xl font-bold text-foreground leading-none"><span className="text-orange-600">Ran</span><span className="text-orange-600">g</span>Mantra</h1>
+              <h1 className="text-3xl font-bold text-foreground leading-none"><span className="bg-gradient-to-r from-orange-800 via-red-700 to-red-800 bg-clip-text text-transparent">Rang</span>Mantra</h1>
               <a 
                 href="https://indrasol.com" 
                 target="_blank" 

@@ -1,3 +1,5 @@
+
+import { detectDevice } from "@/lib/detectDevice";
 // Colorization API service
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
@@ -16,6 +18,12 @@ export interface UploadResponse {
   status: 'processing';
   original_url: string;
   created_at: string;
+}
+
+export interface EphemeralResponse {
+  original_base64: string;
+  colorized_base64: string;
+  expires_in: number;
 }
 
 export class ColorizationAPI {
@@ -121,5 +129,33 @@ export class ColorizationAPI {
     };
     
     poll();
+  }
+
+  static async colorizeEphemeral(file: File): Promise<EphemeralResponse> {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('platform', detectDevice());
+
+    // Attach user metadata if logged in
+    try {
+      const { data: { user } } = await import('@/integrations/supabase/client').then(m => m.supabase.auth.getUser());
+      if (user?.id) formData.append('user_id', user.id);
+      if (user?.email) formData.append('user_email', user.email);
+    } catch (_) {}
+
+    const headers = await this.getAuthHeaders();
+
+    const response = await fetch(`${API_BASE_URL}/v1/colorize/ephemeral`, {
+      method: 'POST',
+      headers,
+      body: formData,
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.detail || `Colorization failed: ${response.status}`);
+    }
+
+    return response.json();
   }
 }

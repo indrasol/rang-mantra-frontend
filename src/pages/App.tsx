@@ -1,7 +1,7 @@
-import { Clock, Heart, LogOut, Palette, Sparkles } from "lucide-react";
-import { ColorizationAPI, ColorizeResponse } from "@/services/colorizationApi";
-import { useEffect, useState } from "react";
 
+import { Heart, LogOut, Palette } from "lucide-react";
+import { ColorizationAPI, EphemeralResponse } from "@/services/colorizationApi";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { FileUpload } from "@/components/FileUpload";
@@ -15,6 +15,8 @@ import { useToast } from "@/hooks/use-toast";
 type AppState = 'upload' | 'processing' | 'complete';
 type ProcessingStage = 'analyzing' | 'colorizing' | 'enhancing' | 'complete';
 
+// Using ColorizationAPI service for endpoints and polling
+
 const App = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -24,7 +26,7 @@ const App = () => {
   const [progress, setProgress] = useState(0);
   const [originalImage, setOriginalImage] = useState<string>('');
   const [colorizedImage, setColorizedImage] = useState<string>('');
-  const [processingStartTime, setProcessingStartTime] = useState<number | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
 
   // Auth protection
   useEffect(() => {
@@ -32,7 +34,7 @@ const App = () => {
       if (session?.user) {
         setUser(session.user);
       } else {
-        navigate('/login');
+        navigate('/');
       }
     });
 
@@ -41,7 +43,7 @@ const App = () => {
         setUser(session.user);
       } else {
         setUser(null);
-        navigate('/login');
+        navigate('/');
       }
     });
 
@@ -50,72 +52,47 @@ const App = () => {
 
   const handleFileSelect = async (file: File) => {
     try {
+      setIsUploading(true);
       // Show original image immediately
-      const imageUrl = URL.createObjectURL(file);
-      setOriginalImage(imageUrl);
+      const origUrl = URL.createObjectURL(file);
+      setOriginalImage(origUrl);
       setAppState('processing');
-      setProcessingStage('analyzing');
-      setProgress(0);
-      setProcessingStartTime(Date.now());
+      setProcessingStage('colorizing');
+      setProgress(50);
 
-      // Upload to colorization API
-      const uploadResponse = await ColorizationAPI.uploadImage(file);
-      
-      // Start polling for status with timeout limits
-      ColorizationAPI.pollStatus(
-        uploadResponse.request_id,
-        (status: ColorizeResponse) => {
-          // Update progress based on status
-          if (status.status === 'processing') {
-            setProgress(75); // Show progress while processing
-            setProcessingStage('colorizing'); // Move to colorizing stage
-          }
-        },
-        (result: ColorizeResponse) => {
-          // Colorization completed successfully
-          if (result.colorized_url) {
-            setColorizedImage(result.colorized_url);
-            setProcessingStage('complete');
-            setProgress(100);
-            setAppState('complete');
-            
-            toast({
-              title: "Colorization Complete!",
-              description: "Your photo has been successfully colorized.",
-            });
-          } else {
-            toast({
-              title: "Colorization Failed",
-              description: "No colorized image URL received",
-              variant: "destructive",
-            });
-            setAppState('upload');
-          }
-        },
-        (error: string) => {
-          // Colorization failed or timed out
-          toast({
-            title: "Colorization Failed",
-            description: error,
-            variant: "destructive",
-          });
-          setAppState('upload');
-          setProcessingStartTime(null);
-        },
-        1000, // Poll every 1 second
-        60,   // Max 60 retries (1 minute)
-        60000 // 60 second timeout
-      );
+      // Call new in-memory colorization API
+      const resp: EphemeralResponse = await ColorizationAPI.colorizeEphemeral(file);
 
-    } catch (error) {
-      console.error('Upload failed:', error);
+      // Helper to convert base64 => Blob => object URL
+      const b64ToUrl = (b64: string): string => {
+        const byteStr = atob(b64);
+        const len = byteStr.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) bytes[i] = byteStr.charCodeAt(i);
+        const blob = new Blob([bytes], { type: 'image/jpeg' });
+        return URL.createObjectURL(blob);
+      };
+
+      const colorUrl = b64ToUrl(resp.colorized_base64);
+      setColorizedImage(colorUrl);
+      setProcessingStage('complete');
+      setProgress(100);
+      setAppState('complete');
+      setIsUploading(false);
       toast({
-        title: "Upload Failed",
-        description: error instanceof Error ? error.message : "Failed to upload image",
-        variant: "destructive",
+        title: 'Colorization Complete!',
+        description: 'Your photo has been successfully colorized.',
+      });
+    } catch (error) {
+      console.error('Colorization failed:', error);
+      toast({
+        title: 'Colorization Failed',
+        description: error instanceof Error ? error.message : 'Failed to colorize image',
+        variant: 'destructive',
       });
       setAppState('upload');
       setProcessingStartTime(null);
+      setIsUploading(false);
     }
   };
 
@@ -129,11 +106,20 @@ const App = () => {
   };
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    toast({
-      title: "Logged out",
-      description: "You've been logged out successfully",
-    });
+    try {
+      await supabase.auth.signOut();
+      navigate('/');
+      toast({
+        title: "Logged out",
+        description: "You've been logged out successfully",
+      });
+    } catch (e) {
+      toast({
+        title: "Logout failed",
+        description: e instanceof Error ? e.message : 'Please try again',
+        variant: 'destructive',
+      });
+    }
   };
 
   if (!user) {
@@ -175,7 +161,7 @@ const App = () => {
         <main className="flex-1 flex items-center justify-center">
           {appState === 'upload' && (
             <div className="w-full max-w-2xl px-4 space-y-4">
-              <FileUpload onFileSelect={handleFileSelect} />
+              <FileUpload onFileSelect={handleFileSelect} isUploading={isUploading} />
               <p className="text-sm text-center font-semibold bg-gradient-to-r from-orange-800 via-red-700 to-red-800 bg-clip-text text-transparent">
                 Perfect for your vintage wedding photos and family memories.
               </p>
@@ -191,11 +177,11 @@ const App = () => {
               />
               
               {originalImage && (
-                <Card className="overflow-hidden shadow-warm">
+                <Card className="overflow-hidden bg-transparent border-none shadow-none p-0">
                   <img 
                     src={originalImage} 
                     alt="Your uploaded photo"
-                    className="w-full h-64 sm:h-auto object-cover sm:max-h-96"
+                    className="w-full max-h-96 object-contain"
                   />
                 </Card>
               )}
