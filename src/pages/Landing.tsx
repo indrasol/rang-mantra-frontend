@@ -35,7 +35,7 @@ const Landing = () => {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-gradient-sunset">
+    <div className="bg-gradient-sunset">
       {/* Navigation */}
       <nav className="container mx-auto px-4 py-6">
         <div className="flex justify-between items-center">
@@ -60,7 +60,7 @@ const Landing = () => {
       </nav>
 
       {/* Hero Section - Split Screen Design */}
-      <section className="min-h-screen flex flex-col">
+      <section className="flex flex-col">
         {/* Header Content */}
         <div className="container mx-auto px-4 py-8 sm:py-10">
           <div className="text-center mb-8 sm:mb-10">
@@ -112,7 +112,7 @@ const Landing = () => {
         </div>
 
         {/* Split Screen Photo Collage */}
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[400px] sm:min-h-[450px] lg:min-h-[500px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 h-[350px] sm:h-[400px] lg:h-[500px]">
           {/* Left Side - Black & White */}
           <div className="bg-gray-900 flex flex-col animate-slide-in-left">
             <div className="p-4 sm:p-6 text-center">
