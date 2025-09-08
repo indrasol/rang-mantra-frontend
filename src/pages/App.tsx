@@ -27,6 +27,7 @@ const App = () => {
   const [originalImage, setOriginalImage] = useState<string>('');
   const [colorizedImage, setColorizedImage] = useState<string>('');
   const [isUploading, setIsUploading] = useState(false);
+  const [processingStartTime, setProcessingStartTime] = useState<number | null>(null);
 
   // Auth protection
   useEffect(() => {
@@ -59,6 +60,7 @@ const App = () => {
       setAppState('processing');
       setProcessingStage('colorizing');
       setProgress(50);
+      setProcessingStartTime(Date.now());
 
       // Call new in-memory colorization API
       const resp: EphemeralResponse = await ColorizationAPI.colorizeEphemeral(file);
