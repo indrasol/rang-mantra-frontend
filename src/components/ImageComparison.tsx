@@ -38,8 +38,9 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
         const blob = await resp.blob();
         const file = new File([blob], 'rangmantra-memory.jpg', { type: blob.type });
         await navigator.share({
-          title: 'My Colorized Memory - RangMantra',
-          text: 'Checkout what RangMantra did to my memory 😍 - Try yourself too [RangMantra](https://rangmantra.indrasol.com)',
+          title: 'RangMantra',
+          text: 'Checkout what RangMantra did to my memory 😍 - Try it too!',
+          url: 'https://rangmantra.indrasol.com',
           files: [file],
         });
       } catch (e) {
