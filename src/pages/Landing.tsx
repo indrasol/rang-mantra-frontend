@@ -112,7 +112,8 @@ const Landing = () => {
         </div>
 
         {/* Split Screen Photo Collage */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 h-[350px] sm:h-[400px] lg:h-[500px]">
+        {/* Remove fixed height so the collage determines its own height */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
           {/* Left Side - Black & White */}
           <div className="bg-gray-900 flex flex-col animate-slide-in-left">
             <div className="p-4 sm:p-6 text-center">
@@ -135,6 +136,7 @@ const Landing = () => {
             </div>
           </div>
         </div>
+        <div className="h-8 md:h-12" />
       </section>
 
       {/* Features Section */}
