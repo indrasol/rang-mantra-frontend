@@ -69,34 +69,12 @@ const Landing = () => {
               <span className="text-muted-foreground"> Black & White </span>
               Photos to Life
             </h1>
-            <div className="flex justify-center animate-fade-in">
-              <div className="inline-flex items-start gap-2 sm:gap-3 px-3 py-2 sm:px-4 sm:py-2 rounded-2xl bg-gradient-warm/15 border border-primary/20 text-foreground shadow-warm backdrop-blur-sm max-w-3xl">
-                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mt-0.5" />
-                <span className="text-sm sm:text-base leading-relaxed text-foreground/80 font-medium">
-                  Transform your precious vintage wedding photos and family memories into stunning colored masterpieces. Perfect for bringing decades-old memories back to life.
-                </span>
-              </div>
-            </div>
+            <p className="text-base sm:text-lg max-w-3xl mx-auto leading-relaxed text-foreground/80 font-medium animate-fade-in">
+              Transform your precious vintage wedding photos and family memories into stunning colored masterpieces — bringing decades-old memories back to life.
+            </p>
             <div className="h-6 sm:h-8" />
             
             {/* Privacy Card */}
-            <div className="mt-4 sm:mt-6 max-w-3xl mx-auto animate-fade-in">
-              <Card className="p-4 sm:p-5 bg-gradient-warm/10 border-primary/20 shadow-warm backdrop-blur-sm">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-black/20 flex items-center justify-center">
-                    <Shield className="w-4 h-4 text-primary-foreground" />
-                  </div>
-                  <div className="text-left">
-                    <p className="text-sm sm:text-base font-semibold text-foreground">
-                      Your privacy, guaranteed
-                    </p>
-                    <p className="text-sm sm:text-base leading-relaxed text-foreground/80 font-medium">
-                      We never store your photos. Processed securely — nothing is saved after colorization.
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            </div>
             <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
               <Button
                 size="lg"
@@ -142,7 +120,7 @@ const Landing = () => {
       {/* Features Section */}
       <section className="container mx-auto px-4 py-16">
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
           <Card className="p-6 text-center space-y-4 shadow-warm bg-card/95 backdrop-blur-sm border-primary/20 transition-transform duration-300 hover:scale-105">
             <div className="w-16 h-16 bg-gradient-warm rounded-2xl flex items-center justify-center mx-auto shadow-glow">
               <Zap className="w-8 h-8 text-primary-foreground" />
@@ -172,10 +150,19 @@ const Landing = () => {
               Specially to add color to your vintage and old wedding photos and family memories that matter most to you.
             </p>
           </Card>
+
+          {/* Privacy Card */}
+          <Card className="p-6 text-center space-y-4 shadow-warm bg-card/95 backdrop-blur-sm border-primary/20 transition-transform duration-300 hover:scale-105">
+            <div className="w-16 h-16 bg-gradient-warm rounded-2xl flex items-center justify-center mx-auto shadow-glow">
+              <Shield className="w-8 h-8 text-primary-foreground" />
+            </div>
+            <h3 className="text-xl font-semibold text-foreground">Privacy First</h3>
+            <p className="text-foreground/70">
+              We never store your photos. Everything is processed securely and deleted immediately.
+            </p>
+          </Card>
         </div>
       </section>
-
-      
 
       {/* CTA Section */}
       <section className="container mx-auto px-4 py-16">
