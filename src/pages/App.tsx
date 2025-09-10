@@ -1,10 +1,11 @@
 
-import { Heart, LogOut, Palette } from "lucide-react";
+import { Camera, Heart, LogOut, Palette } from "lucide-react";
 import { ColorizationAPI, EphemeralResponse } from "@/services/colorizationApi";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { FileUpload } from "@/components/FileUpload";
+import { FloatingFeedback } from "@/components/FloatingFeedback";
 import { ImageComparison } from "@/components/ImageComparison";
 import { ProcessingStatus } from "@/components/ProcessingStatus";
 import { User } from "@supabase/supabase-js";
@@ -136,11 +137,14 @@ const App = () => {
           <div className="flex justify-between items-start mb-4 sm:mb-6">
             <div className="flex-1"></div>
             <div className="inline-flex items-center gap-2 sm:gap-3">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-warm rounded-xl flex items-center justify-center shadow-glow">
+              <div className="relative w-10 h-10 sm:w-12 sm:h-12 bg-gradient-warm rounded-xl flex items-center justify-center shadow-glow">
                 <Palette className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-orange-500 rounded-full flex items-center justify-center shadow-sm">
+                  <Camera className="w-2.5 h-2.5 text-white" />
+                </div>
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
-                <span className="bg-gradient-to-r from-orange-800 via-red-700 to-red-800 bg-clip-text text-transparent">Rang</span>Chitrakar
+                YaadonKe<span className="bg-gradient-to-r from-orange-800 via-red-700 to-red-800 bg-clip-text text-transparent">Rang</span>
               </h1>
             </div>
             <div className="flex-1 flex justify-end gap-2">
@@ -206,6 +210,9 @@ const App = () => {
           </p>
         </footer>
       </div>
+
+      {/* Floating Feedback Component */}
+      {user && <FloatingFeedback userId={user.id} userEmail={user.email} />}
     </div>
   );
 };
