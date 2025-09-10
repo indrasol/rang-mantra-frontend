@@ -14,7 +14,38 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      feedback: {
+        Row: {
+          id: number
+          user_id: string
+          email: string
+          comments: string
+          created_at: string
+        }
+        Insert: {
+          id?: number
+          user_id: string
+          email: string
+          comments: string
+          created_at?: string
+        }
+        Update: {
+          id?: number
+          user_id?: string
+          email?: string
+          comments?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "feedback_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never

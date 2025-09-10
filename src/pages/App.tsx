@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { FileUpload } from "@/components/FileUpload";
+import { FloatingFeedback } from "@/components/FloatingFeedback";
 import { ImageComparison } from "@/components/ImageComparison";
 import { ProcessingStatus } from "@/components/ProcessingStatus";
 import { User } from "@supabase/supabase-js";
@@ -209,6 +210,9 @@ const App = () => {
           </p>
         </footer>
       </div>
+
+      {/* Floating Feedback Component */}
+      {user && <FloatingFeedback userId={user.id} userEmail={user.email} />}
     </div>
   );
 };
