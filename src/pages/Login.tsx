@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Mail, ArrowLeft, Palette } from "lucide-react";
+import { Mail, ArrowLeft, Camera, Palette } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -133,11 +133,14 @@ const Login = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-gradient-warm rounded-xl flex items-center justify-center shadow-glow">
+            <div className="relative w-10 h-10 bg-gradient-warm rounded-xl flex items-center justify-center shadow-glow">
               <Palette className="w-5 h-5 text-primary-foreground" />
+              <div className="absolute -top-1 -right-1 w-4 h-4 bg-orange-500 rounded-full flex items-center justify-center shadow-sm">
+                <Camera className="w-2.5 h-2.5 text-white" />
+              </div>
             </div>
             <div className="flex items-baseline gap-1">
-              <h1 className="text-3xl font-bold text-foreground leading-none"><span className="bg-gradient-to-r from-orange-800 via-red-700 to-red-800 bg-clip-text text-transparent">Rang</span>Chitrakar</h1>
+              <h1 className="text-3xl font-bold text-foreground leading-none">YaadonKe<span className="bg-gradient-to-r from-orange-800 via-red-700 to-red-800 bg-clip-text text-transparent">Rang</span></h1>
               <a 
                 href="https://indrasol.com" 
                 target="_blank" 
