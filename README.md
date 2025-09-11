@@ -1,8 +1,8 @@
-# Welcome to RangMantra
+# Welcome to YaadonKeRang
 
 ## Project info
 
-**URL**: https://rangmantra.netlify.app/
+**URL**: https://yaadonkerang.indrasol.com
 
 
 ## What technologies are used for this project?
