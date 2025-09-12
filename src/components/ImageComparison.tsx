@@ -27,7 +27,7 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
       a.click();
       document.body.removeChild(a);
     } catch (error) {
-      console.error('Download failed:', error);
+      // Download failed silently - browser may have blocked the download
     }
   };
 
@@ -44,7 +44,7 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
           files: [file],
         });
       } catch (e) {
-        console.error('Share failed:', e);
+        // Share failed silently - user may have cancelled or feature not supported
       }
     }
   };

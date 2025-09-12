@@ -1,7 +1,8 @@
 
 import { useState, useCallback, useRef } from "react";
-import { UploadCloud } from "lucide-react";
+import { UploadCloud, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 type FileUploadProps = {
   onFileSelect: (file: File) => void;
@@ -11,6 +12,44 @@ type FileUploadProps = {
 export const FileUpload = ({ onFileSelect, isUploading = false }: FileUploadProps) => {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { toast } = useToast();
+
+  // Allowed image file types
+  const allowedTypes = [
+    'image/jpeg',
+    'image/jpg', 
+    'image/png',
+    'image/gif',
+    'image/webp',
+    'image/bmp',
+    'image/tiff',
+    'image/svg+xml'
+  ];
+
+  const validateImageFile = (file: File): boolean => {
+    // Check file type
+    if (!allowedTypes.includes(file.type.toLowerCase())) {
+      toast({
+        title: "Invalid file type",
+        description: "Please upload an image file (JPG, PNG, GIF, WebP, BMP, TIFF, or SVG)",
+        variant: "destructive",
+      });
+      return false;
+    }
+
+    // Check file size (max 10MB)
+    const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+    if (file.size > maxSize) {
+      toast({
+        title: "File too large",
+        description: "Please upload an image smaller than 10MB",
+        variant: "destructive",
+      });
+      return false;
+    }
+
+    return true;
+  };
 
   const handleDragEnter = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -38,24 +77,26 @@ export const FileUpload = ({ onFileSelect, isUploading = false }: FileUploadProp
 
       if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
         const file = e.dataTransfer.files[0];
-        if (file.type.startsWith("image/")) {
+        if (validateImageFile(file)) {
           onFileSelect(file);
         }
       }
     },
-    [onFileSelect]
+    [onFileSelect, toast]
   );
 
   const handleFileInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.files && e.target.files.length > 0) {
         const file = e.target.files[0];
-        if (file.type.startsWith("image/")) {
+        if (validateImageFile(file)) {
           onFileSelect(file);
         }
+        // Reset the input value so the same file can be selected again
+        e.target.value = '';
       }
     },
-    [onFileSelect]
+    [onFileSelect, toast]
   );
 
   const handleButtonClick = useCallback(() => {
@@ -94,6 +135,9 @@ export const FileUpload = ({ onFileSelect, isUploading = false }: FileUploadProp
           <p className="text-muted-foreground text-sm">
             Drag and drop or click to upload
           </p>
+          <p className="text-xs text-muted-foreground">
+            Supports: JPG, PNG, GIF, WebP, BMP, TIFF, SVG (max 10MB)
+          </p>
         </div>
         <Button
           variant="outline"
@@ -106,7 +150,7 @@ export const FileUpload = ({ onFileSelect, isUploading = false }: FileUploadProp
           type="file"
           ref={fileInputRef}
           onChange={handleFileInputChange}
-          accept="image/*"
+          accept=".jpg,.jpeg,.png,.gif,.webp,.bmp,.tiff,.svg"
           className="hidden"
           disabled={isUploading}
         />

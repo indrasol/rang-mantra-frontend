@@ -51,7 +51,6 @@ export const FloatingFeedback: React.FC<FloatingFeedbackProps> = ({ userId, user
       setFeedback('');
       setIsOpen(false);
     } catch (error) {
-      console.error('Error submitting feedback:', error);
       toast({
         title: "Error",
         description: "Failed to submit feedback. Please try again.",

@@ -87,7 +87,6 @@ const App = () => {
         description: 'Your photo has been successfully colorized.',
       });
     } catch (error) {
-      console.error('Colorization failed:', error);
       toast({
         title: 'Colorization Failed',
         description: error instanceof Error ? error.message : 'Failed to colorize image',
