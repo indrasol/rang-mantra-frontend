@@ -79,47 +79,87 @@ const Landing = () => {
               </a>
             </div>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
-            {/* Stats Section */}
-            <div className="flex items-center gap-3 sm:gap-4">
+          {/* Desktop Stats & Login */}
+          <div className="hidden md:flex items-center gap-4">
+            <div className="flex items-center gap-4">
               <div className="text-center">
-                <div className="text-base sm:text-lg md:text-xl font-bold text-foreground leading-none">
+                <div className="text-xl font-bold text-foreground leading-none">
                   {StatsAPI.formatNumber(stats.total_users)}
                 </div>
                 <div className="flex items-center justify-center gap-1 text-xs text-foreground/70 leading-tight font-bold">
-                  <Users className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600 stroke-2" />
-                  <span className="hidden xs:inline sm:hidden md:inline">Happy Users</span>
-                  <span className="xs:hidden sm:inline md:hidden">Users</span>
+                  <Users className="w-4 h-4 text-orange-600 stroke-2" />
+                  Happy Users
                 </div>
               </div>
               
-              <div className="w-px h-6 sm:h-8 bg-border/50"></div>
+              <div className="w-px h-8 bg-border/50"></div>
               
               <div className="text-center">
-                <div className="text-base sm:text-lg md:text-xl font-bold text-foreground leading-none">
+                <div className="text-xl font-bold text-foreground leading-none">
                   {StatsAPI.formatNumber(stats.total_memories)}
                 </div>
                 <div className="flex items-center justify-center gap-1 text-xs text-foreground/70 leading-tight font-bold">
-                  <Heart className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600 stroke-2" />
-                  <span className="hidden xs:inline sm:hidden md:inline">Memories Revived</span>
-                  <span className="xs:hidden sm:inline md:hidden">Memories</span>
+                  <Heart className="w-4 h-4 text-orange-600 stroke-2" />
+                  Memories Revived
                 </div>
               </div>
             </div>
 
-            {/* Login Button */}
             <Button
               variant="outline"
               size="sm"
               onClick={() => navigate('/login')}
-              className="gap-2 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+              className="gap-2 transition-all duration-300 hover:scale-105"
             >
               <LogIn className="w-4 h-4" />
-              <span>Login</span>
+              Login
             </Button>
           </div>
         </div>
       </nav>
+
+      {/* Mobile Stats & Login Section */}
+      <div className="md:hidden container mx-auto px-4 py-4">
+        <div className="flex flex-col gap-4">
+          {/* Stats */}
+          <div className="flex items-center justify-center gap-6">
+            <div className="text-center">
+              <div className="text-lg font-bold text-foreground leading-none">
+                {StatsAPI.formatNumber(stats.total_users)}
+              </div>
+              <div className="flex items-center justify-center gap-1 text-xs text-foreground/70 leading-tight font-bold">
+                <Users className="w-4 h-4 text-orange-600 stroke-2" />
+                Happy Users
+              </div>
+            </div>
+            
+            <div className="w-px h-8 bg-border/50"></div>
+            
+            <div className="text-center">
+              <div className="text-lg font-bold text-foreground leading-none">
+                {StatsAPI.formatNumber(stats.total_memories)}
+              </div>
+              <div className="flex items-center justify-center gap-1 text-xs text-foreground/70 leading-tight font-bold">
+                <Heart className="w-4 h-4 text-orange-600 stroke-2" />
+                Memories Revived
+              </div>
+            </div>
+          </div>
+
+          {/* Login Button */}
+          <div className="flex justify-center">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate('/login')}
+              className="gap-2 transition-all duration-300 hover:scale-105"
+            >
+              <LogIn className="w-4 h-4" />
+              Login
+            </Button>
+          </div>
+        </div>
+      </div>
 
       {/* Hero Section - Split Screen Design */}
       <section className="flex flex-col">

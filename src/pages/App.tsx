@@ -167,30 +167,28 @@ const App = () => {
                 YaadonKe<span className="bg-gradient-to-r from-orange-800 via-red-700 to-red-800 bg-clip-text text-transparent">Rang</span>
               </h1>
             </div>
-            <div className="flex-1 flex flex-col sm:flex-row justify-end items-center gap-2 sm:gap-4">
-              {/* Stats Display */}
-              <div className="flex items-center gap-2 sm:gap-3">
+            {/* Desktop Stats & Logout */}
+            <div className="hidden md:flex flex-1 justify-end items-center gap-4">
+              <div className="flex items-center gap-3">
                 <div className="text-center">
-                  <div className="text-xs sm:text-sm font-bold text-foreground leading-none">
+                  <div className="text-sm font-bold text-foreground leading-none">
                     {StatsAPI.formatNumber(stats.total_users)}
                   </div>
                   <div className="flex items-center justify-center gap-1 text-xs text-foreground/70 leading-tight font-bold">
-                    <Users className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600 stroke-2" />
-                    <span className="hidden xs:inline sm:hidden md:inline">Happy Users</span>
-                    <span className="xs:hidden sm:inline md:hidden">Users</span>
+                    <Users className="w-4 h-4 text-orange-600 stroke-2" />
+                    Happy Users
                   </div>
                 </div>
                 
-                <div className="w-px h-4 sm:h-6 bg-border/50"></div>
+                <div className="w-px h-6 bg-border/50"></div>
                 
                 <div className="text-center">
-                  <div className="text-xs sm:text-sm font-bold text-foreground leading-none">
+                  <div className="text-sm font-bold text-foreground leading-none">
                     {StatsAPI.formatNumber(stats.total_memories)}
                   </div>
                   <div className="flex items-center justify-center gap-1 text-xs text-foreground/70 leading-tight font-bold">
-                    <Heart className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600 stroke-2" />
-                    <span className="hidden xs:inline sm:hidden md:inline">Memories Revived</span>
-                    <span className="xs:hidden sm:inline md:hidden">Memories</span>
+                    <Heart className="w-4 h-4 text-orange-600 stroke-2" />
+                    Memories Revived
                   </div>
                 </div>
               </div>
@@ -199,10 +197,23 @@ const App = () => {
                 variant="outline"
                 size="sm"
                 onClick={handleLogout}
-                className="gap-2 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+                className="gap-2 transition-all duration-300 hover:scale-105"
               >
                 <LogOut className="w-4 h-4" />
-                <span>Logout</span>
+                Logout
+              </Button>
+            </div>
+
+            {/* Mobile Logout Only */}
+            <div className="md:hidden flex-1 flex justify-end">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleLogout}
+                className="gap-2 transition-all duration-300 hover:scale-105"
+              >
+                <LogOut className="w-4 h-4" />
+                Logout
               </Button>
             </div>
           </div>
@@ -210,6 +221,33 @@ const App = () => {
             Transform your cherished black & white memories into vibrant colored moments
           </p>
         </header>
+
+        {/* Mobile Stats Section */}
+        <div className="md:hidden container mx-auto px-4 py-4">
+          <div className="flex items-center justify-center gap-6">
+            <div className="text-center">
+              <div className="text-lg font-bold text-foreground leading-none">
+                {StatsAPI.formatNumber(stats.total_users)}
+              </div>
+              <div className="flex items-center justify-center gap-1 text-xs text-foreground/70 leading-tight font-bold">
+                <Users className="w-4 h-4 text-orange-600 stroke-2" />
+                Happy Users
+              </div>
+            </div>
+            
+            <div className="w-px h-8 bg-border/50"></div>
+            
+            <div className="text-center">
+              <div className="text-lg font-bold text-foreground leading-none">
+                {StatsAPI.formatNumber(stats.total_memories)}
+              </div>
+              <div className="flex items-center justify-center gap-1 text-xs text-foreground/70 leading-tight font-bold">
+                <Heart className="w-4 h-4 text-orange-600 stroke-2" />
+                Memories Revived
+              </div>
+            </div>
+          </div>
+        </div>
 
         <main className="flex-1 flex items-center justify-center">
           {appState === 'upload' && (
