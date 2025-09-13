@@ -1,5 +1,5 @@
 
-import { Camera, Heart, LogOut, Palette } from "lucide-react";
+import { Camera, Heart, LogOut, Palette, Users } from "lucide-react";
 import { ColorizationAPI, EphemeralResponse } from "@/services/colorizationApi";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,7 @@ import { User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { StatsAPI, StatsResponse } from "@/services/statsApi";
 
 type AppState = 'upload' | 'processing' | 'complete';
 type ProcessingStage = 'analyzing' | 'colorizing' | 'enhancing' | 'complete';
@@ -29,6 +30,11 @@ const App = () => {
   const [colorizedImage, setColorizedImage] = useState<string>('');
   const [isUploading, setIsUploading] = useState(false);
   const [processingStartTime, setProcessingStartTime] = useState<number | null>(null);
+  const [stats, setStats] = useState<StatsResponse>({
+    total_users: 9, // Default fallback values
+    total_memories: 34,
+    last_updated: new Date().toISOString()
+  });
 
   // Auth protection
   useEffect(() => {
@@ -51,6 +57,21 @@ const App = () => {
 
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  // Fetch stats on component mount
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const realStats = await StatsAPI.getStats();
+        setStats(realStats);
+      } catch (error) {
+        console.error('Failed to fetch stats:', error);
+        // Keep fallback values if API fails
+      }
+    };
+
+    fetchStats();
+  }, []);
 
   const handleFileSelect = async (file: File) => {
     try {
@@ -146,15 +167,42 @@ const App = () => {
                 YaadonKe<span className="bg-gradient-to-r from-orange-800 via-red-700 to-red-800 bg-clip-text text-transparent">Rang</span>
               </h1>
             </div>
-            <div className="flex-1 flex justify-end gap-2">
+            <div className="flex-1 flex flex-col sm:flex-row justify-end items-center gap-2 sm:gap-4">
+              {/* Stats Display */}
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="text-center">
+                  <div className="text-xs sm:text-sm font-bold text-foreground leading-none">
+                    {StatsAPI.formatNumber(stats.total_users)}
+                  </div>
+                  <div className="flex items-center justify-center gap-1 text-xs text-foreground/70 leading-tight font-bold">
+                    <Users className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600 stroke-2" />
+                    <span className="hidden xs:inline sm:hidden md:inline">Happy Users</span>
+                    <span className="xs:hidden sm:inline md:hidden">Users</span>
+                  </div>
+                </div>
+                
+                <div className="w-px h-4 sm:h-6 bg-border/50"></div>
+                
+                <div className="text-center">
+                  <div className="text-xs sm:text-sm font-bold text-foreground leading-none">
+                    {StatsAPI.formatNumber(stats.total_memories)}
+                  </div>
+                  <div className="flex items-center justify-center gap-1 text-xs text-foreground/70 leading-tight font-bold">
+                    <Heart className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600 stroke-2" />
+                    <span className="hidden xs:inline sm:hidden md:inline">Memories Revived</span>
+                    <span className="xs:hidden sm:inline md:hidden">Memories</span>
+                  </div>
+                </div>
+              </div>
+
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handleLogout}
-                className="gap-2 transition-all duration-300 hover:scale-105"
+                className="gap-2 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
               >
                 <LogOut className="w-4 h-4" />
-                <span className="hidden sm:inline">Logout</span>
+                <span>Logout</span>
               </Button>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { ArrowRight, Camera, Clock, Heart, LogIn, Palette, Shield, Sparkles, Star, Zap } from "lucide-react";
+import { ArrowRight, Camera, Clock, Heart, LogIn, Palette, Shield, Sparkles, Star, Users, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -7,10 +7,16 @@ import { PhotoCollage } from "@/components/PhotoCollage";
 import { User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { StatsAPI, StatsResponse } from "@/services/statsApi";
 
 const Landing = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
+  const [stats, setStats] = useState<StatsResponse>({
+    total_users: 9, // Default fallback values matching current DB
+    total_memories: 34,
+    last_updated: new Date().toISOString()
+  });
 
   useEffect(() => {
     // Check if user is already logged in
@@ -33,6 +39,21 @@ const Landing = () => {
 
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  // Fetch real-time stats on component mount
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const realStats = await StatsAPI.getStats();
+        setStats(realStats);
+      } catch (error) {
+        console.error('Failed to fetch stats:', error);
+        // Keep fallback values if API fails
+      }
+    };
+
+    fetchStats();
+  }, []);
 
   return (
     <div className="bg-gradient-sunset">
@@ -58,7 +79,45 @@ const Landing = () => {
               </a>
             </div>
           </div>
-          <div></div>
+          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
+            {/* Stats Section */}
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="text-center">
+                <div className="text-base sm:text-lg md:text-xl font-bold text-foreground leading-none">
+                  {StatsAPI.formatNumber(stats.total_users)}
+                </div>
+                <div className="flex items-center justify-center gap-1 text-xs text-foreground/70 leading-tight font-bold">
+                  <Users className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600 stroke-2" />
+                  <span className="hidden xs:inline sm:hidden md:inline">Happy Users</span>
+                  <span className="xs:hidden sm:inline md:hidden">Users</span>
+                </div>
+              </div>
+              
+              <div className="w-px h-6 sm:h-8 bg-border/50"></div>
+              
+              <div className="text-center">
+                <div className="text-base sm:text-lg md:text-xl font-bold text-foreground leading-none">
+                  {StatsAPI.formatNumber(stats.total_memories)}
+                </div>
+                <div className="flex items-center justify-center gap-1 text-xs text-foreground/70 leading-tight font-bold">
+                  <Heart className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600 stroke-2" />
+                  <span className="hidden xs:inline sm:hidden md:inline">Memories Revived</span>
+                  <span className="xs:hidden sm:inline md:hidden">Memories</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Login Button */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate('/login')}
+              className="gap-2 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+            >
+              <LogIn className="w-4 h-4" />
+              <span>Login</span>
+            </Button>
+          </div>
         </div>
       </nav>
 
