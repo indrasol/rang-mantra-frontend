@@ -22,7 +22,7 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
     try {
       const a = document.createElement('a');
       a.href = colorizedImage;
-      a.download = `rangmantra-${Date.now()}.jpg`;
+      a.download = `YaadonKeRang-${Date.now()}.jpg`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -36,11 +36,11 @@ export const ImageComparison = ({ originalImage, colorizedImage, onNewPhoto }: I
       try {
         const resp = await fetch(colorizedImage);
         const blob = await resp.blob();
-        const file = new File([blob], 'rangmantra-memory.jpg', { type: blob.type });
+        const file = new File([blob], 'rYaadonKeRang-memory.jpg', { type: blob.type });
         await navigator.share({
-          title: 'RangMantra',
-          text: 'Checkout what RangMantra did to my memory 😍 - Try it too!',
-          url: 'https://rangmantra.indrasol.com',
+          title: 'YaadonKeRang',
+          text: 'Checkout what YaadonKeRang did to my memory 😍 - Try it too!',
+          url: 'https://yaadonkerang.indrasol.com',
           files: [file],
         });
       } catch (e) {
