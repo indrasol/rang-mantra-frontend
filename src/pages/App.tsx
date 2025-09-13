@@ -164,9 +164,19 @@ const App = () => {
                   <Camera className="w-2.5 h-2.5 text-white" />
                 </div>
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
-                YaadonKe<span className="bg-gradient-to-r from-orange-800 via-red-700 to-red-800 bg-clip-text text-transparent">Rang</span>
-              </h1>
+              <div className="flex items-baseline gap-1">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-none">
+                  YaadonKe<span className="bg-gradient-to-r from-orange-800 via-red-700 to-red-800 bg-clip-text text-transparent">Rang</span>
+                </h1>
+                <a 
+                  href="https://indrasol.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 leading-none mb-0.5"
+                >
+                  by Indrasol
+                </a>
+              </div>
             </div>
             <div className="flex-1 flex justify-end items-center gap-4">
               <div className="flex items-center gap-3">
@@ -214,9 +224,19 @@ const App = () => {
                   <Camera className="w-2 h-2 text-white" />
                 </div>
               </div>
-              <h1 className="text-xl font-bold text-foreground">
-                YaadonKe<span className="bg-gradient-to-r from-orange-800 via-red-700 to-red-800 bg-clip-text text-transparent">Rang</span>
-              </h1>
+              <div className="flex items-baseline gap-1">
+                <h1 className="text-xl font-bold text-foreground leading-none">
+                  YaadonKe<span className="bg-gradient-to-r from-orange-800 via-red-700 to-red-800 bg-clip-text text-transparent">Rang</span>
+                </h1>
+                <a 
+                  href="https://indrasol.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-200 leading-none mb-0.5"
+                >
+                  by Indrasol
+                </a>
+              </div>
             </div>
             
             <Button
