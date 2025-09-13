@@ -79,6 +79,19 @@ const Landing = () => {
               </a>
             </div>
           </div>
+
+          {/* Mobile Login Button */}
+          <div className="md:hidden">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate('/login')}
+              className="gap-2 transition-all duration-300 hover:scale-105"
+            >
+              <LogIn className="w-4 h-4" />
+              Login
+            </Button>
+          </div>
           {/* Desktop Stats & Login */}
           <div className="hidden md:flex items-center gap-4">
             <div className="flex items-center gap-4">
@@ -118,45 +131,29 @@ const Landing = () => {
         </div>
       </nav>
 
-      {/* Mobile Stats & Login Section */}
-      <div className="md:hidden container mx-auto px-4 py-4">
-        <div className="flex flex-col gap-4">
-          {/* Stats */}
-          <div className="flex items-center justify-center gap-6">
-            <div className="text-center">
-              <div className="text-lg font-bold text-foreground leading-none">
-                {StatsAPI.formatNumber(stats.total_users)}
-              </div>
-              <div className="flex items-center justify-center gap-1 text-xs text-foreground/70 leading-tight font-bold">
-                <Users className="w-4 h-4 text-orange-600 stroke-2" />
-                Happy Users
-              </div>
+      {/* Mobile Stats Section */}
+      <div className="md:hidden container mx-auto px-4 py-3">
+        <div className="flex items-center justify-center gap-6">
+          <div className="text-center">
+            <div className="text-lg font-bold text-foreground leading-none">
+              {StatsAPI.formatNumber(stats.total_users)}
             </div>
-            
-            <div className="w-px h-8 bg-border/50"></div>
-            
-            <div className="text-center">
-              <div className="text-lg font-bold text-foreground leading-none">
-                {StatsAPI.formatNumber(stats.total_memories)}
-              </div>
-              <div className="flex items-center justify-center gap-1 text-xs text-foreground/70 leading-tight font-bold">
-                <Heart className="w-4 h-4 text-orange-600 stroke-2" />
-                Memories Revived
-              </div>
+            <div className="flex items-center justify-center gap-1 text-xs text-foreground/70 leading-tight font-bold">
+              <Users className="w-4 h-4 text-orange-600 stroke-2" />
+              Happy Users
             </div>
           </div>
-
-          {/* Login Button */}
-          <div className="flex justify-center">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => navigate('/login')}
-              className="gap-2 transition-all duration-300 hover:scale-105"
-            >
-              <LogIn className="w-4 h-4" />
-              Login
-            </Button>
+          
+          <div className="w-px h-8 bg-border/50"></div>
+          
+          <div className="text-center">
+            <div className="text-lg font-bold text-foreground leading-none">
+              {StatsAPI.formatNumber(stats.total_memories)}
+            </div>
+            <div className="flex items-center justify-center gap-1 text-xs text-foreground/70 leading-tight font-bold">
+              <Heart className="w-4 h-4 text-orange-600 stroke-2" />
+              Memories Revived
+            </div>
           </div>
         </div>
       </div>

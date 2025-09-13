@@ -51,7 +51,7 @@ export class ColorizationAPI {
     
     const headers = await this.getAuthHeaders();
     
-    const response = await fetch(`${API_BASE_URL}/v1/colorize/upload`, {
+    const response = await fetch(`${API_BASE_URL}/api/v1/colorize/upload`, {
       method: 'POST',
       headers,
       body: formData,
@@ -68,7 +68,7 @@ export class ColorizationAPI {
   static async getStatus(requestId: string): Promise<ColorizeResponse> {
     const headers = await this.getAuthHeaders();
     
-    const response = await fetch(`${API_BASE_URL}/v1/colorize/status/${requestId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/v1/colorize/status/${requestId}`, {
       method: 'GET',
       headers,
     });
@@ -145,7 +145,7 @@ export class ColorizationAPI {
 
     const headers = await this.getAuthHeaders();
 
-    const response = await fetch(`${API_BASE_URL}/v1/colorize/ephemeral`, {
+    const response = await fetch(`${API_BASE_URL}/api/v1/colorize/ephemeral`, {
       method: 'POST',
       headers,
       body: formData,
